@@ -1,0 +1,234 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Android Service在后台不被kill | my blog</title>
+  <meta name="author" content="Benko bin">
+  
+  <meta name="description" content="onStartCommand方法,返回START_STICKYService 文档StartCommond几个常量参数简介:
+
+
+START_STICKY
+在运行onStartCommand后service进程被kill后,那将保留在开始状态,但是不保留那些传入的intent不久后service就会">
+  
+  
+  <meta property="og:title" content="Android Service在后台不被kill"/>
+  <meta property="og:site_name" content="my blog"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+   <link rel="apple-touch-icon" href="/icon.png" />
+   <link rel="shortcut icon" href="/favicon.png" >
+   <link rel="alternate" href="http://xxx.xx/atom.xml" title="my blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
+</head>
+
+
+<body>
+  <div id="content" class="inner">
+    <aside id="sidebar" class="alignleft">
+      <div class="navigationBar">
+        <a href="/">my blog</a>
+      </div>
+    	
+  <nav class="widget" id="menu">
+	<ul>
+    
+      <li class="cell"><a class="next" href="/">Home</a><li>
+    
+      <li class="cell"><a class="next" href="/archives/">Archives</a><li>
+    
+      <li class="cell"><a class="next" href="/about/">About</a><li>
+    
+      <li class="cell"><a class="next" href="/atom.xml">Subscribe</a><li>
+    
+    </ul>
+</nav>
+
+  <div class="widget weibo">
+<iframe width="100%" height="100" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=110&fansRow=2&ptype=1&speed=0&skin=1&isTitle=1&noborder=0&isWeibo=0&isFans=0&uid=null&verifier=78e1ee4d&colors=ffffff,ffffff,999,000,ecfbfd&dpc=1"></iframe>
+</div>
+
+  
+
+  
+<div class="widget tagcloud">
+  <h3 class="title">标签云</h3>
+  <div class="entry">
+    <a href="/tags/Andorid/" style="font-size: 15px;">Andorid</a><a href="/tags/Android/" style="font-size: 10px;">Android</a><a href="/tags/Data-Storage/" style="font-size: 10px;">Data Storage</a><a href="/tags/Java/" style="font-size: 20px;">Java</a><a href="/tags/Service/" style="font-size: 10px;">Service</a><a href="/tags/Thread/" style="font-size: 10px;">Thread</a>
+  </div>
+</div>
+
+
+    	<footer id="footer" class="inner"><div class="copyright">
+  
+  &copy; 2015 Benko bin
+  
+</div>
+
+
+
+</footer>
+    </aside>
+    
+    
+    <div id="hidden-navigationBar" class="navigationBar">
+      <a href="/">my blog</a>
+    </div>
+    <div id="main-col" class="alignright">
+    <div id="wrapper">
+      
+<article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+  <header>
+      
+      
+  
+    <h1 class="title">Android Service在后台不被kill</h1>
+  
+
+      <time datetime="2015-05-10T03:44:20.000Z"><a href="/2015/05/10/Android-service在后台不被kill/">2015-05-10</a></time>
+      
+  </header>
+    <div class="entry">
+      
+        <ol>
+<li>onStartCommand方法,返回START_STICKY<br><a href="http://developer.android.com/intl/zh-cn/reference/android/app/Service.html" target="_blank" rel="external">Service 文档</a><h4 id="StartCommond几个常量参数简介:">StartCommond几个常量参数简介:</h4></li>
+</ol>
+<ul>
+<li>START_STICKY<blockquote>
+<p>在运行onStartCommand后service进程被kill后,那将保留在开始状态,但是不保留那些传入的intent不久后service就会再次尝试重新创建,因为保留在开始状态,在创建service后将保证调用onstartCommand。如果没有传递任何开始命令给service,那将获取到null的intent。</p>
+</blockquote>
+</li>
+<li>START_NOT_STICKY<blockquote>
+<p>在运行onStartCommand后service进程被kill后,并且没有新的intent传递给它。Service将移出开始状态,并且直到新的明显的方法(startService)调用才重新创建。因为如果没有传递任何未决定的intent那么service是不会启动,也就是期间onstartCommand不会接收到任何null的intent。</p>
+</blockquote>
+</li>
+<li><p>START_REDELIVER_INTENT</p>
+<blockquote>
+<p>在运行onStartCommand后service进程被kill后,系统将会再次启动service,并传入最后一个intent给onstartCommand。直到调用stopSelf(int)才停止传递intent。如果在被kill后还有未处理好的intent,那被kill后服务还是会自动启动。因此onstartCommand不会接收到任何null的intent。</p>
+</blockquote>
+<p>  手动返回START_STICKY,亲测当service因内存不足被kill ,当内存又有的时候,service又被重新创建,比较不销,但是不能保证任何情况下都被重建,比如进程被干掉了.</p>
+</li>
+</ul>
+<ol>
+<li>提升service优先级</li>
+</ol>
+<p>在AndroidManifest.xml文件中对于intent-filter可以通过android:priority=”1000”这个属性设置最高优先级,1000是最高値,如果数字越小则优先级越低,同时适用于广播。 </p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version="1.0" encoding="utf-8"?&gt;</span><br><span class="line">&lt;service </span><br><span class="line">    android:name="com.dbjtech.acbxt.waiqin.UploadService"</span><br><span class="line">    android:enabled="true" &gt;</span><br><span class="line">    &lt;intent-filter android:priority="10000"</span><br><span class="line">    &lt;action android:name="com.dbjtech.myservice" /&gt; </span><br><span class="line">    &lt;/intent-filter&gt;</span><br><span class="line">&lt;/service&gt;</span><br></pre></td></tr></table></figure>
+<p>目前看来, priority这个属性貌似只适用于broadcast,对于Service来说可能无效</p>
+<p>3.提升service进程优先级</p>
+<p> Android中的进程是托管的,当系统进程空间紧张的时候,会依照优先级自动进行进程的回收。Android将进程分为6个等级,它们按优先级顺序由高到低依次是:</p>
+<ul>
+<li>前台进程(FOREGROUND_APP)</li>
+<li>可视进程(VISIBLE_APP)</li>
+<li>次要服务进程(SECONDARY_SERVER)</li>
+<li>后台进程(HIDDEN_APP)</li>
+<li>内容供应节点(CONTENT_PROVIDER)</li>
+<li>空进程(EMPTY_APP)</li>
+</ul>
+<p>当service运行在低内存的环境时,将会kill掉一些存在的进程。因此进程的优先级将会很重要,可以使用startForeground将service放到前台状态。这样在低内存时被kill 的几率会低一些。</p>
+<p>如果在极度极度低内存的压力下,该service还是会被kill掉,并且不一定会restart</p>
+<p>4.onDestroy方法里重启service</p>
+<p>service+broadcast方式,就是当service走ondestory的时候,发送一个自定文的广播,当收到广播的时候,重新启动service</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">receiver</span> <span class="attribute">android:name</span>=<span class="value">"com.dbjtech.acbxt.waiqin.BootReceiver"</span> &gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">intent-filter</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">action</span> <span class="attribute">android:name</span>=<span class="value">"android.intent.action.B00T_COMPLETED"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">action</span> <span class="attribute">android:name</span>=<span class="value">"android.intent.action.USER_PRESENT"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">action</span> <span class="attribute">android:name</span>=<span class="value">"com.dbjtech.waiqin.destroy"</span> /&gt;</span>//这个就是自定文的action <span class="tag">&lt;/<span class="title">intent-filter</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">receiver</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>在onDestroy时:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="annotation">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onDestroy</span><span class="params">()</span></span>&#123;</span><br><span class="line">  stopForeground(<span class="keyword">true</span>);</span><br><span class="line">  lntent intent= newlntent(<span class="string">"com.dbjtech.waiqin.destroy"</span>); sendBroadcast(intent);</span><br><span class="line">  <span class="keyword">super</span>.onDestroy0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在BootReceiver里</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BootReceiver</span> <span class="keyword">extends</span> <span class="title">BroadcastReceiver</span></span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="annotation">@Override</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onReceive</span><span class="params">(Context context, lntent intent)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(intent.getAction0.equals(<span class="string">"com.dbjtech.waiqin.destroy"</span>)) &#123;</span><br><span class="line">    <span class="comment">//TOD0</span></span><br><span class="line">    <span class="comment">//在这里写重新启动service的相关操作</span></span><br><span class="line">    startUploadService(context);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>也可以直接在onDestroy( )里startService</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="annotation">@Override</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> onDestroy0&#123;</span><br><span class="line">  Intent sevice = <span class="keyword">new</span> Intent(<span class="keyword">this</span>, MainService.class); </span><br><span class="line">  <span class="keyword">this</span>.startService(sevice);</span><br><span class="line">  <span class="keyword">super</span>.onDestroy0; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>当使用类似口口管家等第三方应用或是在setting里一应用一强制停止时, APP 进程可能就直接被干掉了, onDestroy方法都进不来,所以还是无法保证~.~</p>
+<p>5.【终极方案】启动一个native进程,每1分钟检查一下Service是否启动</p>
+<p>注:无需root权限<br>依束: am命令, proc文件系统</p>
+<ul>
+<li>使用popen每1分钟启动一次Service,如果service启动过了,是不会执行onCreate 方法的。<br>以下是 native程序实现test.cpp:</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span>* argv[])</span> </span>&#123;</span><br><span class="line">  <span class="keyword">while</span>(<span class="number">1</span>) &#123;</span><br><span class="line">  <span class="comment">//需要判断app是否已卸載,如果已卸載则退出程序,代码省略</span></span><br><span class="line">  <span class="keyword">char</span>* command= <span class="string">"am startservice -n com.android.xxx/ com.android.xxx.XXXService-u 0"</span>；</span><br><span class="line"></span><br><span class="line">  FILE *fp= popen(command, <span class="string">"r"</span>);</span><br><span class="line">  <span class="keyword">if</span>(fp) &#123;</span><br><span class="line">    pclose(fp);</span><br><span class="line">  &#125;</span><br><span class="line">    sleep(<span class="number">60</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Android.mk文件,与JNl的so不同, Android.mk文件需要重写:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">include$(CLEAR_VARS)</span><br><span class="line">LOCAL_SRC_FILES:= test.cpp</span><br><span class="line">LOCAL_MODULE:= test1</span><br><span class="line">LOCAL_FORCE_STATIC_EXECUTABLE:= <span class="keyword">true</span></span><br><span class="line">LOCAL_STATIC_LIBRARIES:= libc android</span><br><span class="line">LOCAL_MODULE_PATH:= S(TARGET_0UT_0PTIONAL_EXECUTABLES) LOCAL_MODULE_TAGS:= debug</span><br><span class="line"><span class="preprocessor">#注意这里的命令,必须编译成这种文件名,当然是为了逃过android安装</span></span><br><span class="line">LOCAL_MODULE_FILENAME:= <span class="string">"libtest.so"</span></span><br><span class="line">LOCAL_LDLIBS:= -lm-llog-<span class="function">landroid</span><br><span class="line">include <span class="title">S</span><span class="params">(BUILD_EXECUTABLE)</span></span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>Android App中启动一个native进程</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"><span class="javadoc">/***************************************************</span><br><span class="line">* RunExecutable启动一个可自行的lib*.so文件&lt;br&gt; *文件要全名filename&lt;br&gt;</span><br><span class="line">* alias是别名&lt;br&gt;</span><br><span class="line">* args是参数</span><br><span class="line">*********************************************** **/</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">RunExecutable</span><span class="params">(String pacaageName, String filename,String alias, String args)</span> </span>&#123;</span><br><span class="line">  String path= <span class="string">"/data/data/"</span> + pacaageName;</span><br><span class="line">  String cmd1 = path+ <span class="string">"/lib/"</span> + filename;</span><br><span class="line">  String cmd2 = path+ <span class="string">"/"</span> + alias;</span><br><span class="line">  String cmd2_a1 = path+ <span class="string">"/"</span> + alias+ <span class="string">" "</span> + args;</span><br><span class="line">  String cmd3 = <span class="string">"chmod777 "</span> + cmd2;</span><br><span class="line">  String cmd4 = <span class="string">"dd if="</span> + cmd1 + <span class="string">" of="</span> + cmd2;</span><br><span class="line">  StringBuffer sb_result= <span class="keyword">new</span> StringBuffer0;</span><br><span class="line"></span><br><span class="line"> </span><br><span class="line">  <span class="keyword">if</span>(!<span class="keyword">new</span> File(<span class="string">"/data/data/"</span> + alias).exists0) &#123;</span><br><span class="line">    <span class="comment">//拷贝lib/libtest.so到上一层目录,同时命名为test.</span></span><br><span class="line">    RunLocalUserCommand(pacaageName, cmd4, sb_result);</span><br><span class="line">    sb_result.append(<span class="string">";"</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  RunLocalUserCommand(pacaageName, cmd3, sb_result);<span class="comment">//改变test的属性,让其变为可执行</span></span><br><span class="line">  sb_result.append(<span class="string">";"</span>);</span><br><span class="line">  RunLocalUserCommand(pacaageName, cmd2_a1, sb_result);<span class="comment">//执行test程序.</span></span><br><span class="line">  sb_result.append(<span class="string">";"</span>);</span><br><span class="line">  <span class="keyword">return</span> sb_result.toString0;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"> </span><br><span class="line"><span class="javadoc">/****************************************************</span><br><span class="line">* RunLocalUserCommand&lt;br&gt;</span><br><span class="line">*执行本地用户命令</span><br><span class="line">* **************************************************/</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">RunLocalUserCommand</span><span class="params">(String pacaageName, String</span><br><span class="line">command,StringBuffer sb_out_Result)</span> </span>&#123;</span><br><span class="line">  Process process= <span class="keyword">null</span>;</span><br><span class="line">  <span class="keyword">try</span>&#123;</span><br><span class="line">    process= Runtime.getRuntime0.exec(<span class="string">"sh"</span>);<span class="comment">//获得shell进程</span></span><br><span class="line">    DatalnputStream inputStream= <span class="keyword">new</span> DatalnputStream(process.getlnputStream());</span><br><span class="line">    DataOutputStream outputStream= <span class="keyword">new</span> DataOutPutStream(process.getOutStream());</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//保证在command在自己的数据目录里执行,才有权限写文件到当前目录</span></span><br><span class="line">    outputStream.writeBytes(<span class="string">"cd/data/data/"</span> + pacaageName+ <span class="string">"\n"</span>);</span><br><span class="line">    outputStream.writeBytes(command+ <span class="string">" &amp;\n"</span>);<span class="comment">//让程序在后台运行,前台马上返回outputStream.writeBytes("exit\n");</span></span><br><span class="line">    outputStream.flush();</span><br><span class="line">    process.waitFor();</span><br><span class="line">    <span class="keyword">byte</span>[] buffer= <span class="keyword">new</span> <span class="keyword">byte</span>[inputStream.available0]; inputStream.read(buffer);</span><br><span class="line">    String s= <span class="keyword">new</span> String(buffer);</span><br><span class="line">    <span class="keyword">if</span>(sb_out_Result!= <span class="keyword">null</span>) &#123;</span><br><span class="line">      sb_out_Result.append(<span class="string">"CMD Result:\n"</span> + s);</span><br><span class="line">    &#125; </span><br><span class="line">  &#125; <span class="keyword">catch</span>(Exception e) &#123;</span><br><span class="line">    <span class="keyword">if</span>(sb_out_Result!= <span class="keyword">null</span>)&#123;</span><br><span class="line">      sb_out_Result.append(<span class="string">"Exception:"</span> + e.getMessage0); </span><br><span class="line">    &#125;</span><br><span class="line">      <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+	     
+	         <p style="margin:20px 0; color:#9f9f9f; font-size:12px;">
+<span>Posted by <a style="color:#9f9f9f;" href="null"><strong>null</strong></a> - 2015-05-10</span><br />
+<span style="line-height:13px;">如需转载，请注明： 本文来自 <a style="color:#9f9f9f;" href="http://scalaview.github.io"><strong>my blog</strong></a></span>
+</p>
+       	
+      
+    </div>
+    <footer>
+      
+	 
+     		  
+       		
+  
+  <div class="tags">
+    <a href="/tags/Android/">Android</a>, <a href="/tags/Java/">Java</a>, <a href="/tags/Service/">Service</a>
+  </div>
+
+     		  
+       	 
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<section id="comments">
+    <!-- 多说评论框 start -->
+    <div class="ds-thread" data-thread-key="post-Android-service在后台不被kill" data-title="Android Service在后台不被kill" data-url="http://scalaview.github.io/2015/05/10/Android-service在后台不被kill/"></div>
+    <!-- 多说评论框 end -->
+    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+    <script type="text/javascript">
+    var duoshuoQuery = {short_name:'scalaview'};
+      (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0]
+         || document.getElementsByTagName('body')[0]).appendChild(ds);
+      })();
+      </script>
+    <!-- 多说公共JS代码 end -->
+  </section>
+</div>
+    </div>
+    <div class="tabbar" onload="divideTabBar()">
+	
+      <div class="tabbaritem"><a class="next" href="/">Home</a></div>
+    
+      <div class="tabbaritem"><a class="next" href="/archives/">Archives</a></div>
+    
+      <div class="tabbaritem"><a class="next" href="/about/">About</a></div>
+    
+      <div class="tabbaritem"><a class="next" href="/atom.xml">Subscribe</a></div>
+    
+</div>
+
+
+  </div>
+</body>
+</html>
