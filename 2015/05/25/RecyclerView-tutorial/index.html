@@ -1,0 +1,175 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>RecyclerView-Tutorial | 王见充时光</title>
+  <meta name="author" content="Benko bin">
+  
+  <meta name="description" content="RecyclerView 介绍官方文档：RecyclerViewRecycleView 是google的v7 包中用来替代ListView，其中直接拥有缓存模块ViewHolder。里面包含的LayoutManager 可以很方便的实现ListView，GridView,下拉刷新。ItemAnima">
+  
+  
+  <meta property="og:title" content="RecyclerView-Tutorial"/>
+  <meta property="og:site_name" content="王见充时光"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+   <link rel="apple-touch-icon" href="/icon.png" />
+   <link rel="shortcut icon" href="/favicon.ico" >
+   <link rel="alternate" href="http://xxx.xx/atom.xml" title="王见充时光" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  <script src="//ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.3.min.js"></script>
+</head>
+
+
+<body>
+  <div id="content" class="inner">
+    <aside id="sidebar" class="alignleft">
+      <div class="navigationBar">
+        <a href="/">王见充时光</a>
+      </div>
+    	
+  <nav class="widget" id="menu">
+	<ul>
+    
+      <li class="cell"><a class="next" href="/">Home</a><li>
+    
+      <li class="cell"><a class="next" href="/archives/">Archives</a><li>
+    
+      <li class="cell"><a class="next" href="/about/">About</a><li>
+    
+      <li class="cell"><a class="next" href="/atom.xml">Subscribe</a><li>
+    
+    </ul>
+</nav>
+
+  
+
+  
+<div class="widget tagcloud">
+  <h3 class="title">标签云</h3>
+  <div class="entry">
+    <a href="/tags/Android/" style="font-size: 20px;">Android</a><a href="/tags/Data-Storage/" style="font-size: 10px;">Data Storage</a><a href="/tags/Java/" style="font-size: 15px;">Java</a><a href="/tags/Jquery/" style="font-size: 10px;">Jquery</a><a href="/tags/RecyclerView/" style="font-size: 10px;">RecyclerView</a><a href="/tags/Service/" style="font-size: 10px;">Service</a><a href="/tags/Thread/" style="font-size: 10px;">Thread</a><a href="/tags/listView/" style="font-size: 10px;">listView</a><a href="/tags/优化/" style="font-size: 10px;">优化</a>
+  </div>
+</div>
+
+
+    	<footer id="footer" class="inner"><div class="copyright">
+  
+  &copy; 2015 Benko bin
+  
+</div>
+
+
+
+</footer>
+    </aside>
+    
+    
+    <div id="hidden-navigationBar" class="navigationBar">
+      <a href="/">王见充时光</a>
+    </div>
+    <div id="main-col" class="alignright">
+    <div id="wrapper">
+      
+<article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+  <header>
+      
+      
+  
+    <h1 class="title">RecyclerView-Tutorial</h1>
+  
+
+      <time datetime="2015-05-25T14:04:21.000Z"><a href="/2015/05/25/RecyclerView-tutorial/">2015-05-25</a></time>
+      
+  </header>
+    <div class="entry">
+      
+        <h2 id="RecyclerView_介绍">RecyclerView 介绍</h2><p>官方文档：<a href="https://developer.android.com/intl/zh-cn/reference/android/support/v7/widget/RecyclerView.html" target="_blank" rel="external">RecyclerView</a><br>RecycleView 是google的v7 包中用来替代ListView，其中直接拥有缓存模块ViewHolder。里面包含的LayoutManager 可以很方便的实现ListView，GridView,下拉刷新。ItemAnimation也很好的实现了每个Item的特效。</p>
+<h2 id="RecyclerView_使用">RecyclerView 使用</h2><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">android.support.v7.widget.RecyclerView</span></span><br><span class="line">               <span class="attribute">android:id</span>=<span class="value">"@+id/list"</span></span><br><span class="line">               <span class="attribute">android:clipToPadding</span>=<span class="value">"false"</span></span><br><span class="line">               <span class="attribute">android:layout_width</span>=<span class="value">"match_parent"</span></span><br><span class="line">               <span class="attribute">android:layout_height</span>=<span class="value">"match_parent"</span></span><br><span class="line">               <span class="attribute">android:paddingRight</span>=<span class="value">"@dimen/activity_horizontal_margin"</span></span><br><span class="line">               <span class="attribute">android:paddingLeft</span>=<span class="value">"@dimen/activity_horizontal_margin"</span></span><br><span class="line">               <span class="attribute">android:paddingTop</span>=<span class="value">"@dimen/activity_horizontal_margin"</span></span><br><span class="line">               <span class="attribute">android:paddingBottom</span>=<span class="value">"@dimen/activity_vertical_margin"</span></span><br><span class="line">               /&gt;</span></span><br></pre></td></tr></table></figure>
+<h5 id="Activity">Activity</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MainActivity</span> <span class="keyword">extends</span> <span class="title">AppCompatActivity</span> </span>&#123;</span><br><span class="line">    <span class="annotation">@InjectView</span>(R.id.list)</span><br><span class="line">    RecyclerView mRecyclerView;</span><br><span class="line"></span><br><span class="line">    <span class="annotation">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;</span><br><span class="line">      <span class="keyword">super</span>.onCreate(savedInstanceState);</span><br><span class="line">      setContentView(R.layout.activity_main);</span><br><span class="line">      ButterKnife.inject(<span class="keyword">this</span>);</span><br><span class="line"></span><br><span class="line">      mRecyclerView = (RecyclerView) findViewById(R.id.list);</span><br><span class="line">      mRecyclerView.setLayoutManager(<span class="keyword">new</span> LinearLayoutManager(<span class="keyword">this</span>));</span><br><span class="line">      mRecyclerView.setItemAnimator(<span class="keyword">new</span> CustomItemAnimator());</span><br><span class="line"></span><br><span class="line">      mAdapter = <span class="keyword">new</span> ApplicationAdapter(<span class="keyword">new</span> ArrayList&lt;AppInfo&gt;(), R.layout.row_application, MainActivity.<span class="keyword">this</span>);</span><br><span class="line">      mRecyclerView.setAdapter(mAdapter);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>上面的代码还需要两个class，一个是CustomItemAnimator，用来做现实item特效；另一个是Adapter；下面分别实现</p>
+<h5 id="Adapter">Adapter</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ApplicationAdapter</span> <span class="keyword">extends</span> <span class="title">RecyclerView</span>.<span class="title">Adapter</span>&lt;<span class="title">ApplicationAdapter</span>.<span class="title">ViewHolder</span>&gt; </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> List&lt;AppInfo&gt; applications;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> rowLayout;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">ApplicationAdapter</span><span class="params">(List&lt;AppInfo&gt; applications, <span class="keyword">int</span> rowLayout)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.applications = applications;</span><br><span class="line">        <span class="keyword">this</span>.rowLayout = rowLayout;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="annotation">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> ViewHolder <span class="title">onCreateViewHolder</span><span class="params">(<span class="keyword">final</span> ViewGroup viewGroup, <span class="keyword">int</span> i)</span> </span>&#123;</span><br><span class="line">        View v = LayoutInflater.from(viewGroup.getContext()).inflate(rowLayout, viewGroup, <span class="keyword">false</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> ViewHolder(v);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="annotation">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onBindViewHolder</span><span class="params">(<span class="keyword">final</span> ViewHolder viewHolder, <span class="keyword">int</span> i)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">final</span> AppInfo appInfo = applications.get(i);</span><br><span class="line">        viewHolder.name.setText(appInfo.getName());</span><br><span class="line">        viewHolder.image.setImageDrawable(appInfo.getIcon());</span><br><span class="line"></span><br><span class="line">        viewHolder.itemView.setOnClickListener(<span class="keyword">new</span> View.OnClickListener() &#123;</span><br><span class="line">            <span class="annotation">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onClick</span><span class="params">(View v)</span> </span>&#123;</span><br><span class="line">                <span class="comment">// your code</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="annotation">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getItemCount</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> applications == <span class="keyword">null</span> ? <span class="number">0</span> : applications.size();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">ViewHolder</span> <span class="keyword">extends</span> <span class="title">RecyclerView</span>.<span class="title">ViewHolder</span> </span>&#123;  <span class="comment">//内部类，ViewHolder 线程同步View变化</span></span><br><span class="line">        <span class="keyword">public</span> TextView name;</span><br><span class="line">        <span class="keyword">public</span> ImageView image;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="title">ViewHolder</span><span class="params">(View itemView)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">super</span>(itemView);</span><br><span class="line">            name = (TextView) itemView.findViewById(R.id.countryName);</span><br><span class="line">            image = (ImageView) itemView.findViewById(R.id.countryImage);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="ItemAnimator">ItemAnimator</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ReboundItemAnimator</span> <span class="keyword">extends</span> <span class="title">RecyclerView</span>.<span class="title">ItemAnimator</span> </span>&#123;</span><br><span class="line">    <span class="comment">//hold the views to animate in runPendingAnimations</span></span><br><span class="line">    <span class="keyword">private</span> List&lt;RecyclerView.ViewHolder&gt; mViewHolders = <span class="keyword">new</span> ArrayList&lt;RecyclerView.ViewHolder&gt;();</span><br><span class="line"></span><br><span class="line">    <span class="annotation">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">runPendingAnimations</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (!mViewHolders.isEmpty()) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">final</span> RecyclerView.ViewHolder viewHolder : mViewHolders) &#123;</span><br><span class="line">                <span class="comment">// your code about animation</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="annotation">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">animateRemove</span><span class="params">(RecyclerView.ViewHolder viewHolder)</span> </span>&#123;</span><br><span class="line">        viewHolder.itemView.animate().alpha(<span class="number">0</span>).scaleX(<span class="number">0</span>).scaleY(<span class="number">0</span>).setDuration(<span class="number">300</span>).start();</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="annotation">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">animateAdd</span><span class="params">(RecyclerView.ViewHolder viewHolder)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//viewHolder.itemView.setAlpha(0.0f);</span></span><br><span class="line">        viewHolder.itemView.setScaleX(<span class="number">0</span>);</span><br><span class="line">        viewHolder.itemView.setScaleY(<span class="number">0</span>);</span><br><span class="line">        <span class="keyword">return</span> mViewHolders.add(viewHolder);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="annotation">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">animateMove</span><span class="params">(RecyclerView.ViewHolder viewHolder, <span class="keyword">int</span> i, <span class="keyword">int</span> i2, <span class="keyword">int</span> i3, <span class="keyword">int</span> i4)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="annotation">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">animateChange</span><span class="params">(RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder viewHolder2, <span class="keyword">int</span> i, <span class="keyword">int</span> i2, <span class="keyword">int</span> i3, <span class="keyword">int</span> i4)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="annotation">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">endAnimation</span><span class="params">(RecyclerView.ViewHolder viewHolder)</span> </span>&#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="annotation">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">endAnimations</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="annotation">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isRunning</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> !mViewHolders.isEmpty();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="运行效果">运行效果</h4><img src="/2015/05/25/RecyclerView-tutorial/screenshot.png">
+
+	     
+	         <p style="margin:20px 0; color:#9f9f9f; font-size:12px;">
+<span>Posted by <a style="color:#9f9f9f;" href="https://github.com/scalaview"><strong>scalaview</strong></a> - 2015-05-25</span><br />
+<span style="line-height:13px;">如需转载，请注明： 本文来自 <a style="color:#9f9f9f;" href="http://scalaview.github.io"><strong>王见充时光</strong></a></span>
+</p>
+       	
+      
+    </div>
+    <footer>
+      
+	 
+     		  
+       		
+  
+  <div class="tags">
+    <a href="/tags/Android/">Android</a>, <a href="/tags/RecyclerView/">RecyclerView</a>
+  </div>
+
+     		  
+       	 
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<section id="comments">
+    <!-- 多说评论框 start -->
+    <div class="ds-thread" data-thread-key="post-RecyclerView-tutorial" data-title="RecyclerView-Tutorial" data-url="http://scalaview.github.io/2015/05/25/RecyclerView-tutorial/"></div>
+    <!-- 多说评论框 end -->
+    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+    <script type="text/javascript">
+    var duoshuoQuery = {short_name:'scalaview'};
+      (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0]
+         || document.getElementsByTagName('body')[0]).appendChild(ds);
+      })();
+      </script>
+    <!-- 多说公共JS代码 end -->
+  </section>
+</div>
+    </div>
+    <div class="tabbar" onload="divideTabBar()">
+	
+      <div class="tabbaritem"><a class="next" href="/">Home</a></div>
+    
+      <div class="tabbaritem"><a class="next" href="/archives/">Archives</a></div>
+    
+      <div class="tabbaritem"><a class="next" href="/about/">About</a></div>
+    
+      <div class="tabbaritem"><a class="next" href="/atom.xml">Subscribe</a></div>
+    
+</div>
+
+
+  </div>
+</body>
+</html>

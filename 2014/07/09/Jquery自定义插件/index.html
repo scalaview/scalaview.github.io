@@ -1,0 +1,183 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Jquery自定义插件 | 王见充时光</title>
+  <meta name="author" content="Benko bin">
+  
+  <meta name="description" content="Jquery 自定义插件平时看到的Jquery插件都是 $(“xxx”).my_plugin()这样子就能使用。对于jquery来说自定义插件非常方便，只需要实现 $.fn.my_plugin这种类型的方法就可以。
+在这里我们实现一个瀑布流的产品选择器
+12345678910111213141516">
+  
+  
+  <meta property="og:title" content="Jquery自定义插件"/>
+  <meta property="og:site_name" content="王见充时光"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+   <link rel="apple-touch-icon" href="/icon.png" />
+   <link rel="shortcut icon" href="/favicon.ico" >
+   <link rel="alternate" href="http://xxx.xx/atom.xml" title="王见充时光" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  <script src="//ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.3.min.js"></script>
+</head>
+
+
+<body>
+  <div id="content" class="inner">
+    <aside id="sidebar" class="alignleft">
+      <div class="navigationBar">
+        <a href="/">王见充时光</a>
+      </div>
+    	
+  <nav class="widget" id="menu">
+	<ul>
+    
+      <li class="cell"><a class="next" href="/">Home</a><li>
+    
+      <li class="cell"><a class="next" href="/archives/">Archives</a><li>
+    
+      <li class="cell"><a class="next" href="/about/">About</a><li>
+    
+      <li class="cell"><a class="next" href="/atom.xml">Subscribe</a><li>
+    
+    </ul>
+</nav>
+
+  
+
+  
+<div class="widget tagcloud">
+  <h3 class="title">标签云</h3>
+  <div class="entry">
+    <a href="/tags/Android/" style="font-size: 20px;">Android</a><a href="/tags/Data-Storage/" style="font-size: 10px;">Data Storage</a><a href="/tags/Java/" style="font-size: 15px;">Java</a><a href="/tags/Jquery/" style="font-size: 10px;">Jquery</a><a href="/tags/RecyclerView/" style="font-size: 10px;">RecyclerView</a><a href="/tags/Service/" style="font-size: 10px;">Service</a><a href="/tags/Thread/" style="font-size: 10px;">Thread</a><a href="/tags/listView/" style="font-size: 10px;">listView</a><a href="/tags/优化/" style="font-size: 10px;">优化</a>
+  </div>
+</div>
+
+
+    	<footer id="footer" class="inner"><div class="copyright">
+  
+  &copy; 2015 Benko bin
+  
+</div>
+
+
+
+</footer>
+    </aside>
+    
+    
+    <div id="hidden-navigationBar" class="navigationBar">
+      <a href="/">王见充时光</a>
+    </div>
+    <div id="main-col" class="alignright">
+    <div id="wrapper">
+      
+<article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+  <header>
+      
+      
+  
+    <h1 class="title">Jquery自定义插件</h1>
+  
+
+      <time datetime="2014-07-09T14:51:27.000Z"><a href="/2014/07/09/Jquery自定义插件/">2014-07-09</a></time>
+      
+  </header>
+    <div class="entry">
+      
+        <h2 id="Jquery_自定义插件">Jquery 自定义插件</h2><p>平时看到的Jquery插件都是 $(“xxx”).my_plugin()这样子就能使用。对于jquery来说自定义插件非常方便，只需要实现 $.fn.my_plugin这种类型的方法就可以。</p>
+<p>在这里我们实现一个瀑布流的产品选择器</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">(<span class="function"><span class="keyword">function</span><span class="params">($)</span> </span>&#123;</span><br><span class="line">  <span class="comment">// 需要实现的各种方法在这里实现</span></span><br><span class="line">  </span><br><span class="line">  <span class="keyword">return</span> $.fn.productsModalSelector = <span class="function"><span class="keyword">function</span><span class="params">(options, callBack)</span> </span>&#123;</span><br><span class="line">  </span><br><span class="line">      <span class="keyword">return</span> $(<span class="keyword">this</span>).each(<span class="function"><span class="keyword">function</span><span class="params">(i, e)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">var</span> defaults = &#123;</span><br><span class="line">          width: <span class="string">'1250px'</span>,</span><br><span class="line">          height: <span class="string">'320px'</span>,</span><br><span class="line">          remove_result: <span class="literal">true</span>,</span><br><span class="line">          remove_chosen: <span class="literal">true</span>,</span><br><span class="line">          debug: <span class="literal">false</span>,</span><br><span class="line">          pagination: <span class="string">".pagination a"</span>,</span><br><span class="line">          multiple: <span class="literal">true</span>,</span><br><span class="line">          type: <span class="string">'product'</span>,</span><br><span class="line">          extend_params: &#123;&#125;,</span><br><span class="line">          after_save: <span class="function"><span class="keyword">function</span><span class="params">(data)</span> </span>&#123;&#125;,   <span class="comment">// 一个回调函数， 为了可以让用户选择完成后能够自定义一些处理函数</span></span><br><span class="line">        &#125;  <span class="comment">// 默认传入的参数， 可以被重载</span></span><br><span class="line">        <span class="keyword">var</span> $<span class="keyword">this</span> = $(e)</span><br><span class="line">        _data_extend($<span class="keyword">this</span>, defaults)</span><br><span class="line">  </span><br><span class="line">        options = $.extend(<span class="literal">true</span>, &#123;&#125;, defaults, options);</span><br><span class="line">        initialization($<span class="keyword">this</span>, options)</span><br><span class="line">  </span><br><span class="line">        $<span class="keyword">this</span>.click(<span class="function"><span class="keyword">function</span><span class="params">()</span> </span>&#123;</span><br><span class="line">          $save_btn.unbind(<span class="string">"click"</span>);</span><br><span class="line">          $root.modal(&#123;</span><br><span class="line">            width: options.width,</span><br><span class="line">            height: options.height</span><br><span class="line">          &#125;);</span><br><span class="line">          $save_btn.click(<span class="function"><span class="keyword">function</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            <span class="keyword">var</span> products = selectedItmes()</span><br><span class="line">            <span class="comment">// 函数内自己的处理</span></span><br><span class="line">            options.after_save.call($<span class="keyword">this</span>, products)  <span class="comment">// 调用用户重载的回调函数传入选择好的products</span></span><br><span class="line">            <span class="comment">// 函数内自己的处理</span></span><br><span class="line">          &#125;);</span><br><span class="line">        &#125;);</span><br><span class="line">      &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">  </span><br><span class="line">  &#125;)(jQuery);</span><br></pre></td></tr></table></figure>
+<p>上面简单的实现了自定义插件的基本框架</p>
+<h3 id="瀑布流">瀑布流</h3><p>瀑布流是指我们很流行的拉伸刷新，只要你查看到底部，就会请求下一页的数据</p>
+<p>需要使用到的方法就是 <a href="http://api.jquery.com/scroll/" target="_blank" rel="external">jquery scroll</a>，利用这个方法实现：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> nDivHight = $results_list.height();  <span class="comment">//用户能看到的高度</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> _scroll = <span class="function"><span class="keyword">function</span><span class="params">(event)</span></span>&#123;</span><br><span class="line">  <span class="keyword">var</span> options = event.data</span><br><span class="line">  nScrollHight = $(<span class="keyword">this</span>)[<span class="number">0</span>].scrollHeight;  <span class="comment">//用来获取这个元素的高度</span></span><br><span class="line">  nScrollTop = $(<span class="keyword">this</span>)[<span class="number">0</span>].scrollTop;      <span class="comment">//用来获取这个元素</span></span><br><span class="line">  <span class="keyword">if</span>(nScrollTop + nDivHight &gt;= nScrollHight &amp;&amp; !loading)&#123;  <span class="comment">//判断是不是拉到底部</span></span><br><span class="line">    loading = <span class="literal">true</span></span><br><span class="line">    _loader.call($(<span class="keyword">this</span>), options)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>负责请求数据的方法，瀑布流的原理很简单，每次拉伸除了请求本次数据以外还需要拿到下次请求数据的链接，当被拉伸到底部，请求方法根据链接请求下一页</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> _loader = <span class="function"><span class="keyword">function</span><span class="params">(options)</span></span>&#123;</span><br><span class="line">    <span class="keyword">var</span> _url = $(options.pagination).attr(<span class="string">"href"</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">typeof</span> _url != <span class="string">"undefined"</span> &amp;&amp; _url.trim() != <span class="string">""</span>)&#123;</span><br><span class="line">      $results_list.append(<span class="string">'&lt;div id="state_mes" class="span1 offset4"&gt;&lt;i class="icon-spinner icon-spin orange bigger-250"&gt;&lt;/i&gt;&lt;/div&gt;'</span>)</span><br><span class="line"></span><br><span class="line">      $.ajax(&#123;</span><br><span class="line">        url : _url,</span><br><span class="line">        dataType : <span class="string">'html'</span>,</span><br><span class="line">        success : <span class="function"><span class="keyword">function</span><span class="params">(data)</span></span>&#123;</span><br><span class="line">          <span class="keyword">if</span> (options.debug) &#123;</span><br><span class="line">                <span class="built_in">console</span>.log(data)</span><br><span class="line">          &#125;</span><br><span class="line">          $(options.pagination).remove() <span class="comment">// 下一页的链接</span></span><br><span class="line">          $results_list.append(data)</span><br><span class="line">          loading = <span class="literal">false</span></span><br><span class="line">        &#125;,</span><br><span class="line">        error : <span class="function"><span class="keyword">function</span><span class="params">(xhr, status)</span></span>&#123;</span><br><span class="line">          $(<span class="string">"#state_mes"</span>).remove()</span><br><span class="line">          $results_list.append(<span class="string">'&lt;div id="state_mes" class="span2 offset2"&gt;&lt;p&gt;loading fail&lt;/div&gt;'</span>)</span><br><span class="line">          setTimeout(_remove_mes, <span class="number">1000</span>) <span class="comment">// 显示错误信息，等待1秒后删除</span></span><br><span class="line">        &#125;</span><br><span class="line">      &#125;)</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">      $results_list.append(<span class="string">'&lt;div id="state_mes" class="span3 offset1"&gt;&lt;p&gt;you hit the end of the results&lt;/div&gt;'</span>)</span><br><span class="line">      setTimeout(<span class="string">'$("#state_mes").remove()'</span>, <span class="number">1000</span>)  <span class="comment">//已经没有下一页</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<p>最后就是在init 的时候为每个方法绑定<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$results_list.bind(<span class="string">"scroll"</span>, options, _scroll)</span><br></pre></td></tr></table></figure></p>
+<p>后台需要返回的数据：</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">next_url = <span class="string">"<span class="subst">#&#123;search_product_search_index_path&#125;</span>?query=<span class="subst">#&#123;params[<span class="symbol">:query</span>]&#125;</span>&amp;page=<span class="subst">#&#123;<span class="variable">@products</span>.next_page&#125;</span>&amp;type=<span class="subst">#&#123;params[<span class="symbol">:type</span>]&#125;</span>"</span> <span class="keyword">unless</span> <span class="variable">@products</span>.last_page?</span><br><span class="line">respond_to <span class="keyword">do</span> |format|</span><br><span class="line">    format.html &#123;</span><br><span class="line">     render <span class="symbol">:partial</span> =&gt; <span class="string">'result_list'</span>, <span class="symbol">:locals=&gt;</span>&#123;<span class="symbol">:</span><span class="variable">@products</span> =&gt; <span class="variable">@products</span>, <span class="symbol">:</span><span class="variable">@next</span> =&gt; next_url&#125;</span><br><span class="line">    &#125;</span><br><span class="line">    format.json&#123;</span><br><span class="line">      render <span class="symbol">:json</span> =&gt; &#123; <span class="symbol">:products</span> =&gt; <span class="variable">@products</span>.as_json(<span class="symbol">only:</span> [ <span class="symbol">:id</span>, <span class="symbol">:name</span>, <span class="symbol">:model</span>, <span class="symbol">:image</span> ], <span class="symbol">methods:</span> [<span class="symbol">:image_thumb_url</span>]),</span><br><span class="line">                        <span class="symbol">:next_url</span> =&gt; next_url</span><br><span class="line">                      &#125;</span><br><span class="line">    &#125;</span><br><span class="line"> <span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<h2 id="效果图">效果图</h2><img src="/2014/07/09/Jquery自定义插件/case-example.png">
+<img src="/2014/07/09/Jquery自定义插件/case-select.png">
+<img src="/2014/07/09/Jquery自定义插件/loading.png">
+	     
+	         <p style="margin:20px 0; color:#9f9f9f; font-size:12px;">
+<span>Posted by <a style="color:#9f9f9f;" href="https://github.com/scalaview"><strong>scalaview</strong></a> - 2014-07-09</span><br />
+<span style="line-height:13px;">如需转载，请注明： 本文来自 <a style="color:#9f9f9f;" href="http://scalaview.github.io"><strong>王见充时光</strong></a></span>
+</p>
+       	
+      
+    </div>
+    <footer>
+      
+	 
+     		  
+       		
+  
+  <div class="tags">
+    <a href="/tags/Jquery/">Jquery</a>
+  </div>
+
+     		  
+       	 
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<section id="comments">
+    <!-- 多说评论框 start -->
+    <div class="ds-thread" data-thread-key="post-Jquery自定义插件" data-title="Jquery自定义插件" data-url="http://scalaview.github.io/2014/07/09/Jquery自定义插件/"></div>
+    <!-- 多说评论框 end -->
+    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+    <script type="text/javascript">
+    var duoshuoQuery = {short_name:'scalaview'};
+      (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0]
+         || document.getElementsByTagName('body')[0]).appendChild(ds);
+      })();
+      </script>
+    <!-- 多说公共JS代码 end -->
+  </section>
+</div>
+    </div>
+    <div class="tabbar" onload="divideTabBar()">
+	
+      <div class="tabbaritem"><a class="next" href="/">Home</a></div>
+    
+      <div class="tabbaritem"><a class="next" href="/archives/">Archives</a></div>
+    
+      <div class="tabbaritem"><a class="next" href="/about/">About</a></div>
+    
+      <div class="tabbaritem"><a class="next" href="/atom.xml">Subscribe</a></div>
+    
+</div>
+
+
+  </div>
+</body>
+</html>

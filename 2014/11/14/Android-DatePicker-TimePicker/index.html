@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Android DatePicker&amp;TimePicker | my blog</title>
+  <title>Android DatePicker&amp;TimePicker | 王见充时光</title>
   <meta name="author" content="Benko bin">
   
   <meta name="description" content="DatePicker继承自FrameLayout类，日期选择控件的主要功能是向用户提供包含年、月、日的日 期数据并允许用户对其修改。如果要捕获用户修改日期选择控件中的数据事件，需要为DatePicker添加OnDateChangedListener监听器。
@@ -11,18 +11,18 @@ TimePicker也继承自FrameLa">
   
   
   <meta property="og:title" content="Android DatePicker&amp;TimePicker"/>
-  <meta property="og:site_name" content="my blog"/>
+  <meta property="og:site_name" content="王见充时光"/>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
   
     <meta property="og:image" content="undefined"/>
   
    <link rel="apple-touch-icon" href="/icon.png" />
-   <link rel="shortcut icon" href="/favicon.png" >
-   <link rel="alternate" href="http://xxx.xx/atom.xml" title="my blog" type="application/atom+xml">
+   <link rel="shortcut icon" href="/favicon.ico" >
+   <link rel="alternate" href="http://xxx.xx/atom.xml" title="王见充时光" type="application/atom+xml">
   <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
   <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
+  <script src="//ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.3.min.js"></script>
 </head>
 
 
@@ -30,7 +30,7 @@ TimePicker也继承自FrameLa">
   <div id="content" class="inner">
     <aside id="sidebar" class="alignleft">
       <div class="navigationBar">
-        <a href="/">my blog</a>
+        <a href="/">王见充时光</a>
       </div>
     	
   <nav class="widget" id="menu">
@@ -47,17 +47,13 @@ TimePicker也继承自FrameLa">
     </ul>
 </nav>
 
-  <div class="widget weibo">
-<iframe width="100%" height="100" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=110&fansRow=2&ptype=1&speed=0&skin=1&isTitle=1&noborder=0&isWeibo=0&isFans=0&uid=null&verifier=78e1ee4d&colors=ffffff,ffffff,999,000,ecfbfd&dpc=1"></iframe>
-</div>
-
   
 
   
 <div class="widget tagcloud">
   <h3 class="title">标签云</h3>
   <div class="entry">
-    <a href="/tags/Andorid/" style="font-size: 15px;">Andorid</a><a href="/tags/Android/" style="font-size: 10px;">Android</a><a href="/tags/Data-Storage/" style="font-size: 10px;">Data Storage</a><a href="/tags/Java/" style="font-size: 20px;">Java</a><a href="/tags/Service/" style="font-size: 10px;">Service</a><a href="/tags/Thread/" style="font-size: 10px;">Thread</a>
+    <a href="/tags/Android/" style="font-size: 20px;">Android</a><a href="/tags/Data-Storage/" style="font-size: 10px;">Data Storage</a><a href="/tags/Java/" style="font-size: 15px;">Java</a><a href="/tags/Jquery/" style="font-size: 10px;">Jquery</a><a href="/tags/RecyclerView/" style="font-size: 10px;">RecyclerView</a><a href="/tags/Service/" style="font-size: 10px;">Service</a><a href="/tags/Thread/" style="font-size: 10px;">Thread</a><a href="/tags/listView/" style="font-size: 10px;">listView</a><a href="/tags/优化/" style="font-size: 10px;">优化</a>
   </div>
 </div>
 
@@ -75,7 +71,7 @@ TimePicker也继承自FrameLa">
     
     
     <div id="hidden-navigationBar" class="navigationBar">
-      <a href="/">my blog</a>
+      <a href="/">王见充时光</a>
     </div>
     <div id="main-col" class="alignright">
     <div id="wrapper">
@@ -102,24 +98,24 @@ TimePicker也继承自FrameLa">
     <h1 class="title">Android DatePicker&amp;TimePicker</h1>
   
 
-      <time datetime="2015-05-09T02:52:09.000Z"><a href="/2015/05/09/Android-DatePicker-TimePicker/">2015-05-09</a></time>
+      <time datetime="2014-11-14T02:52:09.000Z"><a href="/2014/11/14/Android-DatePicker-TimePicker/">2014-11-14</a></time>
       
   </header>
     <div class="entry">
       
         <p>DatePicker继承自FrameLayout类，日期选择控件的主要功能是向用户提供包含年、月、日的日 期数据并允许用户对其修改。如果要捕获用户修改日期选择控件中的数据事件，需要为DatePicker添加OnDateChangedListener监听器。</p>
 <p>TimePicker也继承自FrameLayout类。时间选择控件向用户显示一天中的时 间（可以为24小时，也可以为AM/PM制），并允许用户进行选择。如果要捕获用户修改时间数据的事件，便需要为TimePicker添加 OnTimeChangedListener监听器<br>以下模拟日期与时间选择控件的用法<br>目录结构</p>
-<img src="/2015/05/09/Android-DatePicker-TimePicker/package.png">
+<img src="/2014/11/14/Android-DatePicker-TimePicker/package.png">
 <p>main.xml布局文件</p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="pi">&lt;?xml version="1.0" encoding="utf-8"?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">LinearLayout</span> <span class="attribute">xmlns:android</span>=<span class="value">"http://schemas.android.com/apk/res/android"</span></span><br><span class="line">    <span class="attribute">android:orientation</span>=<span class="value">"vertical"</span></span><br><span class="line">    <span class="attribute">android:layout_width</span>=<span class="value">"fill_parent"</span></span><br><span class="line">    <span class="attribute">android:layout_height</span>=<span class="value">"fill_parent"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">DatePicker</span> <span class="attribute">android:id</span>=<span class="value">"@+id/datePicker"</span> </span><br><span class="line">        <span class="attribute">android:layout_width</span>=<span class="value">"wrap_content"</span></span><br><span class="line">        <span class="attribute">android:layout_height</span>=<span class="value">"wrap_content"</span></span><br><span class="line">        <span class="attribute">android:layout_gravity</span>=<span class="value">"center_horizontal"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">EditText</span> <span class="attribute">android:id</span>=<span class="value">"@+id/dateEt"</span></span><br><span class="line">        <span class="attribute">android:layout_width</span>=<span class="value">"fill_parent"</span></span><br><span class="line">        <span class="attribute">android:layout_height</span>=<span class="value">"wrap_content"</span></span><br><span class="line">        <span class="attribute">android:cursorVisible</span>=<span class="value">"false"</span></span><br><span class="line">        <span class="attribute">android:editable</span>=<span class="value">"false"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">TimePicker</span> <span class="attribute">android:id</span>=<span class="value">"@+id/timePicker"</span> </span><br><span class="line">        <span class="attribute">android:layout_width</span>=<span class="value">"wrap_content"</span></span><br><span class="line">        <span class="attribute">android:layout_height</span>=<span class="value">"wrap_content"</span></span><br><span class="line">        <span class="attribute">android:layout_gravity</span>=<span class="value">"center_horizontal"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">EditText</span> <span class="attribute">android:id</span>=<span class="value">"@+id/timeEt"</span></span><br><span class="line">        <span class="attribute">android:layout_width</span>=<span class="value">"fill_parent"</span></span><br><span class="line">        <span class="attribute">android:layout_height</span>=<span class="value">"wrap_content"</span></span><br><span class="line">        <span class="attribute">android:cursorVisible</span>=<span class="value">"false"</span></span><br><span class="line">        <span class="attribute">android:editable</span>=<span class="value">"false"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">LinearLayout</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <p>DpTpActivity类</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.ljq.activity;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.Calendar;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> android.app.Activity;</span><br><span class="line"><span class="keyword">import</span> android.os.Bundle;</span><br><span class="line"><span class="keyword">import</span> android.widget.DatePicker;</span><br><span class="line"><span class="keyword">import</span> android.widget.EditText;</span><br><span class="line"><span class="keyword">import</span> android.widget.TimePicker;</span><br><span class="line"><span class="keyword">import</span> android.widget.DatePicker.OnDateChangedListener;</span><br><span class="line"><span class="keyword">import</span> android.widget.TimePicker.OnTimeChangedListener;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DpTpActivity</span> <span class="keyword">extends</span> <span class="title">Activity</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> EditText dateEt=<span class="keyword">null</span>;</span><br><span class="line">    <span class="keyword">private</span> EditText timeEt=<span class="keyword">null</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="annotation">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState);</span><br><span class="line">        setContentView(R.layout.main);</span><br><span class="line">        dateEt=(EditText)findViewById(R.id.dateEt);</span><br><span class="line">        timeEt=(EditText)findViewById(R.id.timeEt);</span><br><span class="line">        DatePicker datePicker=(DatePicker)findViewById(R.id.datePicker);</span><br><span class="line">        TimePicker timePicker=(TimePicker)findViewById(R.id.timePicker);</span><br><span class="line">        </span><br><span class="line">        Calendar calendar=Calendar.getInstance();</span><br><span class="line">        <span class="keyword">int</span> year=calendar.get(Calendar.YEAR);</span><br><span class="line">        <span class="keyword">int</span> monthOfYear=calendar.get(Calendar.MONTH);</span><br><span class="line">        <span class="keyword">int</span> dayOfMonth=calendar.get(Calendar.DAY_OF_MONTH);</span><br><span class="line">        datePicker.init(year, monthOfYear, dayOfMonth, <span class="keyword">new</span> OnDateChangedListener()&#123;</span><br><span class="line"></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onDateChanged</span><span class="params">(DatePicker view, <span class="keyword">int</span> year,</span><br><span class="line">                    <span class="keyword">int</span> monthOfYear, <span class="keyword">int</span> dayOfMonth)</span> </span>&#123;</span><br><span class="line">                dateEt.setText(<span class="string">"您选择的日期是："</span>+year+<span class="string">"年"</span>+(monthOfYear+<span class="number">1</span>)+<span class="string">"月"</span>+dayOfMonth+<span class="string">"日。"</span>);</span><br><span class="line">            &#125;</span><br><span class="line">            </span><br><span class="line">        &#125;);</span><br><span class="line">        </span><br><span class="line">        timePicker.setOnTimeChangedListener(<span class="keyword">new</span> OnTimeChangedListener()&#123;</span><br><span class="line"></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onTimeChanged</span><span class="params">(TimePicker view, <span class="keyword">int</span> hourOfDay, <span class="keyword">int</span> minute)</span> </span>&#123;</span><br><span class="line">                timeEt.setText(<span class="string">"您选择的时间是："</span>+hourOfDay+<span class="string">"时"</span>+minute+<span class="string">"分。"</span>);</span><br><span class="line">            &#125;</span><br><span class="line">            </span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>运行结果<br><img src="/2015/05/09/Android-DatePicker-TimePicker/screentshort.png"></p>
+<p>运行结果<br><img src="/2014/11/14/Android-DatePicker-TimePicker/screentshort.png"></p>
 
 	     
 	         <p style="margin:20px 0; color:#9f9f9f; font-size:12px;">
-<span>Posted by <a style="color:#9f9f9f;" href="null"><strong>null</strong></a> - 2015-05-09</span><br />
-<span style="line-height:13px;">如需转载，请注明： 本文来自 <a style="color:#9f9f9f;" href="http://scalaview.github.io"><strong>my blog</strong></a></span>
+<span>Posted by <a style="color:#9f9f9f;" href="https://github.com/scalaview"><strong>scalaview</strong></a> - 2014-11-14</span><br />
+<span style="line-height:13px;">如需转载，请注明： 本文来自 <a style="color:#9f9f9f;" href="http://scalaview.github.io"><strong>王见充时光</strong></a></span>
 </p>
        	
       
@@ -140,7 +136,7 @@ TimePicker也继承自FrameLa">
 
 <section id="comments">
     <!-- 多说评论框 start -->
-    <div class="ds-thread" data-thread-key="post-Android-DatePicker-TimePicker" data-title="Android DatePicker&amp;TimePicker" data-url="http://scalaview.github.io/2015/05/09/Android-DatePicker-TimePicker/"></div>
+    <div class="ds-thread" data-thread-key="post-Android-DatePicker-TimePicker" data-title="Android DatePicker&amp;TimePicker" data-url="http://scalaview.github.io/2014/11/14/Android-DatePicker-TimePicker/"></div>
     <!-- 多说评论框 end -->
     <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
     <script type="text/javascript">

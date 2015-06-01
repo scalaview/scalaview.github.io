@@ -1,0 +1,169 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Android ToggleButton | 王见充时光</title>
+  <meta name="author" content="Benko bin">
+  
+  <meta name="description" content="ToggleButton的状态只能是选中和未选中，并且需要为不同的状态设置不同的显示文本。以下案例为ToggleButton的用法目录结构main.xml布局文件
+1234567891011121314151617&amp;lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&amp;gt">
+  
+  
+  <meta property="og:title" content="Android ToggleButton"/>
+  <meta property="og:site_name" content="王见充时光"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+   <link rel="apple-touch-icon" href="/icon.png" />
+   <link rel="shortcut icon" href="/favicon.ico" >
+   <link rel="alternate" href="http://xxx.xx/atom.xml" title="王见充时光" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  <script src="//ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.3.min.js"></script>
+</head>
+
+
+<body>
+  <div id="content" class="inner">
+    <aside id="sidebar" class="alignleft">
+      <div class="navigationBar">
+        <a href="/">王见充时光</a>
+      </div>
+    	
+  <nav class="widget" id="menu">
+	<ul>
+    
+      <li class="cell"><a class="next" href="/">Home</a><li>
+    
+      <li class="cell"><a class="next" href="/archives/">Archives</a><li>
+    
+      <li class="cell"><a class="next" href="/about/">About</a><li>
+    
+      <li class="cell"><a class="next" href="/atom.xml">Subscribe</a><li>
+    
+    </ul>
+</nav>
+
+  
+
+  
+<div class="widget tagcloud">
+  <h3 class="title">标签云</h3>
+  <div class="entry">
+    <a href="/tags/Android/" style="font-size: 20px;">Android</a><a href="/tags/Data-Storage/" style="font-size: 10px;">Data Storage</a><a href="/tags/Java/" style="font-size: 15px;">Java</a><a href="/tags/Jquery/" style="font-size: 10px;">Jquery</a><a href="/tags/RecyclerView/" style="font-size: 10px;">RecyclerView</a><a href="/tags/Service/" style="font-size: 10px;">Service</a><a href="/tags/Thread/" style="font-size: 10px;">Thread</a><a href="/tags/listView/" style="font-size: 10px;">listView</a><a href="/tags/优化/" style="font-size: 10px;">优化</a>
+  </div>
+</div>
+
+
+    	<footer id="footer" class="inner"><div class="copyright">
+  
+  &copy; 2015 Benko bin
+  
+</div>
+
+
+
+</footer>
+    </aside>
+    
+    
+    <div id="hidden-navigationBar" class="navigationBar">
+      <a href="/">王见充时光</a>
+    </div>
+    <div id="main-col" class="alignright">
+    <div id="wrapper">
+      
+<article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+  <header>
+      
+      
+  
+    <h1 class="title">Android ToggleButton</h1>
+  
+
+      <time datetime="2015-01-19T08:10:48.000Z"><a href="/2015/01/19/Android-ToggleButton/">2015-01-19</a></time>
+      
+  </header>
+    <div class="entry">
+      
+        <p>ToggleButton的状态只能是选中和未选中，并且需要为不同的状态设置不同的显示文本。<br>以下案例为ToggleButton的用法<br>目录结构<br><img src="/2015/01/19/Android-ToggleButton/package.png"><br>main.xml布局文件</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="pi">&lt;?xml version="1.0" encoding="utf-8"?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">LinearLayout</span> <span class="attribute">xmlns:android</span>=<span class="value">"http://schemas.android.com/apk/res/android"</span></span><br><span class="line">    <span class="attribute">android:orientation</span>=<span class="value">"vertical"</span></span><br><span class="line">    <span class="attribute">android:layout_width</span>=<span class="value">"fill_parent"</span></span><br><span class="line">    <span class="attribute">android:layout_height</span>=<span class="value">"fill_parent"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">ImageView</span> <span class="attribute">android:id</span>=<span class="value">"@+id/imageView"</span></span><br><span class="line">        <span class="attribute">android:layout_width</span>=<span class="value">"wrap_content"</span></span><br><span class="line">        <span class="attribute">android:layout_height</span>=<span class="value">"wrap_content"</span></span><br><span class="line">        <span class="attribute">android:src</span>=<span class="value">"@drawable/bulb_off"</span></span><br><span class="line">        <span class="attribute">android:layout_gravity</span>=<span class="value">"center_horizontal"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">ToggleButton</span> <span class="attribute">android:id</span>=<span class="value">"@+id/toggleButton"</span></span><br><span class="line">        <span class="attribute">android:layout_width</span>=<span class="value">"140dip"</span></span><br><span class="line">        <span class="attribute">android:layout_height</span>=<span class="value">"wrap_content"</span></span><br><span class="line">        <span class="attribute">android:textOn</span>=<span class="value">"开灯"</span></span><br><span class="line">        <span class="attribute">android:textOff</span>=<span class="value">"关灯"</span></span><br><span class="line">        <span class="attribute">android:layout_gravity</span>=<span class="value">"center_horizontal"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">LinearLayout</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>ToggleButtonActivity类</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.ljq.tb;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> android.app.Activity;</span><br><span class="line"><span class="keyword">import</span> android.os.Bundle;</span><br><span class="line"><span class="keyword">import</span> android.widget.CompoundButton;</span><br><span class="line"><span class="keyword">import</span> android.widget.ImageView;</span><br><span class="line"><span class="keyword">import</span> android.widget.ToggleButton;</span><br><span class="line"><span class="keyword">import</span> android.widget.CompoundButton.OnCheckedChangeListener;</span><br><span class="line">​</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ToggleButtonActivity</span> <span class="keyword">extends</span> <span class="title">Activity</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> ImageView imageView=<span class="keyword">null</span>;</span><br><span class="line">    <span class="keyword">private</span> ToggleButton toggleButton=<span class="keyword">null</span>;</span><br><span class="line"></span><br><span class="line">    <span class="annotation">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState);</span><br><span class="line">        setContentView(R.layout.main);</span><br><span class="line"></span><br><span class="line">        imageView=(ImageView) findViewById(R.id.imageView);</span><br><span class="line">        toggleButton=(ToggleButton)findViewById(R.id.toggleButton);</span><br><span class="line">        toggleButton.setOnCheckedChangeListener(<span class="keyword">new</span> OnCheckedChangeListener()&#123;</span><br><span class="line"></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onCheckedChanged</span><span class="params">(CompoundButton buttonView,</span><br><span class="line">                    <span class="keyword">boolean</span> isChecked)</span> </span>&#123;</span><br><span class="line">                toggleButton.setChecked(isChecked);</span><br><span class="line">                imageView.setImageResource(isChecked ? R.drawable.bulb_on : R.drawable.bulb_off);</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行效果：<br><img src="/2015/01/19/Android-ToggleButton/screentshort.png"></p>
+
+	     
+	         <p style="margin:20px 0; color:#9f9f9f; font-size:12px;">
+<span>Posted by <a style="color:#9f9f9f;" href="https://github.com/scalaview"><strong>scalaview</strong></a> - 2015-01-19</span><br />
+<span style="line-height:13px;">如需转载，请注明： 本文来自 <a style="color:#9f9f9f;" href="http://scalaview.github.io"><strong>王见充时光</strong></a></span>
+</p>
+       	
+      
+    </div>
+    <footer>
+      
+	 
+     		  
+       		
+     		  
+       	 
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<section id="comments">
+    <!-- 多说评论框 start -->
+    <div class="ds-thread" data-thread-key="post-Android-ToggleButton" data-title="Android ToggleButton" data-url="http://scalaview.github.io/2015/01/19/Android-ToggleButton/"></div>
+    <!-- 多说评论框 end -->
+    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+    <script type="text/javascript">
+    var duoshuoQuery = {short_name:'scalaview'};
+      (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0]
+         || document.getElementsByTagName('body')[0]).appendChild(ds);
+      })();
+      </script>
+    <!-- 多说公共JS代码 end -->
+  </section>
+</div>
+    </div>
+    <div class="tabbar" onload="divideTabBar()">
+	
+      <div class="tabbaritem"><a class="next" href="/">Home</a></div>
+    
+      <div class="tabbaritem"><a class="next" href="/archives/">Archives</a></div>
+    
+      <div class="tabbaritem"><a class="next" href="/about/">About</a></div>
+    
+      <div class="tabbaritem"><a class="next" href="/atom.xml">Subscribe</a></div>
+    
+</div>
+
+
+  </div>
+</body>
+</html>

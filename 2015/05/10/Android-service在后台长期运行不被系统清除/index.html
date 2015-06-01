@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Android Service在后台不被kill | my blog</title>
+  <title>Android Service在后台长期运行不被系统清除 | 王见充时光</title>
   <meta name="author" content="Benko bin">
   
   <meta name="description" content="onStartCommand方法,返回START_STICKYService 文档StartCommond几个常量参数简介:
@@ -13,19 +13,19 @@ START_STICKY
 在运行onStartCommand后service进程被kill后,那将保留在开始状态,但是不保留那些传入的intent不久后service就会">
   
   
-  <meta property="og:title" content="Android Service在后台不被kill"/>
-  <meta property="og:site_name" content="my blog"/>
+  <meta property="og:title" content="Android Service在后台长期运行不被系统清除"/>
+  <meta property="og:site_name" content="王见充时光"/>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
   
     <meta property="og:image" content="undefined"/>
   
    <link rel="apple-touch-icon" href="/icon.png" />
-   <link rel="shortcut icon" href="/favicon.png" >
-   <link rel="alternate" href="http://xxx.xx/atom.xml" title="my blog" type="application/atom+xml">
+   <link rel="shortcut icon" href="/favicon.ico" >
+   <link rel="alternate" href="http://xxx.xx/atom.xml" title="王见充时光" type="application/atom+xml">
   <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
   <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
+  <script src="//ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.3.min.js"></script>
 </head>
 
 
@@ -33,7 +33,7 @@ START_STICKY
   <div id="content" class="inner">
     <aside id="sidebar" class="alignleft">
       <div class="navigationBar">
-        <a href="/">my blog</a>
+        <a href="/">王见充时光</a>
       </div>
     	
   <nav class="widget" id="menu">
@@ -50,17 +50,13 @@ START_STICKY
     </ul>
 </nav>
 
-  <div class="widget weibo">
-<iframe width="100%" height="100" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=110&fansRow=2&ptype=1&speed=0&skin=1&isTitle=1&noborder=0&isWeibo=0&isFans=0&uid=null&verifier=78e1ee4d&colors=ffffff,ffffff,999,000,ecfbfd&dpc=1"></iframe>
-</div>
-
   
 
   
 <div class="widget tagcloud">
   <h3 class="title">标签云</h3>
   <div class="entry">
-    <a href="/tags/Andorid/" style="font-size: 15px;">Andorid</a><a href="/tags/Android/" style="font-size: 10px;">Android</a><a href="/tags/Data-Storage/" style="font-size: 10px;">Data Storage</a><a href="/tags/Java/" style="font-size: 20px;">Java</a><a href="/tags/Service/" style="font-size: 10px;">Service</a><a href="/tags/Thread/" style="font-size: 10px;">Thread</a>
+    <a href="/tags/Android/" style="font-size: 20px;">Android</a><a href="/tags/Data-Storage/" style="font-size: 10px;">Data Storage</a><a href="/tags/Java/" style="font-size: 15px;">Java</a><a href="/tags/Jquery/" style="font-size: 10px;">Jquery</a><a href="/tags/RecyclerView/" style="font-size: 10px;">RecyclerView</a><a href="/tags/Service/" style="font-size: 10px;">Service</a><a href="/tags/Thread/" style="font-size: 10px;">Thread</a><a href="/tags/listView/" style="font-size: 10px;">listView</a><a href="/tags/优化/" style="font-size: 10px;">优化</a>
   </div>
 </div>
 
@@ -78,7 +74,7 @@ START_STICKY
     
     
     <div id="hidden-navigationBar" class="navigationBar">
-      <a href="/">my blog</a>
+      <a href="/">王见充时光</a>
     </div>
     <div id="main-col" class="alignright">
     <div id="wrapper">
@@ -102,10 +98,10 @@ START_STICKY
       
       
   
-    <h1 class="title">Android Service在后台不被kill</h1>
+    <h1 class="title">Android Service在后台长期运行不被系统清除</h1>
   
 
-      <time datetime="2015-05-10T03:44:20.000Z"><a href="/2015/05/10/Android-service在后台不被kill/">2015-05-10</a></time>
+      <time datetime="2015-05-10T03:44:20.000Z"><a href="/2015/05/10/Android-service在后台长期运行不被系统清除/">2015-05-10</a></time>
       
   </header>
     <div class="entry">
@@ -171,8 +167,8 @@ START_STICKY
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"><span class="javadoc">/***************************************************</span><br><span class="line">* RunExecutable启动一个可自行的lib*.so文件&lt;br&gt; *文件要全名filename&lt;br&gt;</span><br><span class="line">* alias是别名&lt;br&gt;</span><br><span class="line">* args是参数</span><br><span class="line">*********************************************** **/</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">RunExecutable</span><span class="params">(String pacaageName, String filename,String alias, String args)</span> </span>&#123;</span><br><span class="line">  String path= <span class="string">"/data/data/"</span> + pacaageName;</span><br><span class="line">  String cmd1 = path+ <span class="string">"/lib/"</span> + filename;</span><br><span class="line">  String cmd2 = path+ <span class="string">"/"</span> + alias;</span><br><span class="line">  String cmd2_a1 = path+ <span class="string">"/"</span> + alias+ <span class="string">" "</span> + args;</span><br><span class="line">  String cmd3 = <span class="string">"chmod777 "</span> + cmd2;</span><br><span class="line">  String cmd4 = <span class="string">"dd if="</span> + cmd1 + <span class="string">" of="</span> + cmd2;</span><br><span class="line">  StringBuffer sb_result= <span class="keyword">new</span> StringBuffer0;</span><br><span class="line"></span><br><span class="line"> </span><br><span class="line">  <span class="keyword">if</span>(!<span class="keyword">new</span> File(<span class="string">"/data/data/"</span> + alias).exists0) &#123;</span><br><span class="line">    <span class="comment">//拷贝lib/libtest.so到上一层目录,同时命名为test.</span></span><br><span class="line">    RunLocalUserCommand(pacaageName, cmd4, sb_result);</span><br><span class="line">    sb_result.append(<span class="string">";"</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  RunLocalUserCommand(pacaageName, cmd3, sb_result);<span class="comment">//改变test的属性,让其变为可执行</span></span><br><span class="line">  sb_result.append(<span class="string">";"</span>);</span><br><span class="line">  RunLocalUserCommand(pacaageName, cmd2_a1, sb_result);<span class="comment">//执行test程序.</span></span><br><span class="line">  sb_result.append(<span class="string">";"</span>);</span><br><span class="line">  <span class="keyword">return</span> sb_result.toString0;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"> </span><br><span class="line"><span class="javadoc">/****************************************************</span><br><span class="line">* RunLocalUserCommand&lt;br&gt;</span><br><span class="line">*执行本地用户命令</span><br><span class="line">* **************************************************/</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">RunLocalUserCommand</span><span class="params">(String pacaageName, String</span><br><span class="line">command,StringBuffer sb_out_Result)</span> </span>&#123;</span><br><span class="line">  Process process= <span class="keyword">null</span>;</span><br><span class="line">  <span class="keyword">try</span>&#123;</span><br><span class="line">    process= Runtime.getRuntime0.exec(<span class="string">"sh"</span>);<span class="comment">//获得shell进程</span></span><br><span class="line">    DatalnputStream inputStream= <span class="keyword">new</span> DatalnputStream(process.getlnputStream());</span><br><span class="line">    DataOutputStream outputStream= <span class="keyword">new</span> DataOutPutStream(process.getOutStream());</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//保证在command在自己的数据目录里执行,才有权限写文件到当前目录</span></span><br><span class="line">    outputStream.writeBytes(<span class="string">"cd/data/data/"</span> + pacaageName+ <span class="string">"\n"</span>);</span><br><span class="line">    outputStream.writeBytes(command+ <span class="string">" &amp;\n"</span>);<span class="comment">//让程序在后台运行,前台马上返回outputStream.writeBytes("exit\n");</span></span><br><span class="line">    outputStream.flush();</span><br><span class="line">    process.waitFor();</span><br><span class="line">    <span class="keyword">byte</span>[] buffer= <span class="keyword">new</span> <span class="keyword">byte</span>[inputStream.available0]; inputStream.read(buffer);</span><br><span class="line">    String s= <span class="keyword">new</span> String(buffer);</span><br><span class="line">    <span class="keyword">if</span>(sb_out_Result!= <span class="keyword">null</span>) &#123;</span><br><span class="line">      sb_out_Result.append(<span class="string">"CMD Result:\n"</span> + s);</span><br><span class="line">    &#125; </span><br><span class="line">  &#125; <span class="keyword">catch</span>(Exception e) &#123;</span><br><span class="line">    <span class="keyword">if</span>(sb_out_Result!= <span class="keyword">null</span>)&#123;</span><br><span class="line">      sb_out_Result.append(<span class="string">"Exception:"</span> + e.getMessage0); </span><br><span class="line">    &#125;</span><br><span class="line">      <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 	     
 	         <p style="margin:20px 0; color:#9f9f9f; font-size:12px;">
-<span>Posted by <a style="color:#9f9f9f;" href="null"><strong>null</strong></a> - 2015-05-10</span><br />
-<span style="line-height:13px;">如需转载，请注明： 本文来自 <a style="color:#9f9f9f;" href="http://scalaview.github.io"><strong>my blog</strong></a></span>
+<span>Posted by <a style="color:#9f9f9f;" href="https://github.com/scalaview"><strong>scalaview</strong></a> - 2015-05-10</span><br />
+<span style="line-height:13px;">如需转载，请注明： 本文来自 <a style="color:#9f9f9f;" href="http://scalaview.github.io"><strong>王见充时光</strong></a></span>
 </p>
        	
       
@@ -198,7 +194,7 @@ START_STICKY
 
 <section id="comments">
     <!-- 多说评论框 start -->
-    <div class="ds-thread" data-thread-key="post-Android-service在后台不被kill" data-title="Android Service在后台不被kill" data-url="http://scalaview.github.io/2015/05/10/Android-service在后台不被kill/"></div>
+    <div class="ds-thread" data-thread-key="post-Android-service在后台长期运行不被系统清除" data-title="Android Service在后台长期运行不被系统清除" data-url="http://scalaview.github.io/2015/05/10/Android-service在后台长期运行不被系统清除/"></div>
     <!-- 多说评论框 end -->
     <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
     <script type="text/javascript">
