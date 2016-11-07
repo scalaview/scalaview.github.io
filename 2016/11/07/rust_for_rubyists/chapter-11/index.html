@@ -1,0 +1,225 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>王见充时光</title>
+  <meta name="author" content="Benko bin">
+  
+  <meta name="description" content="Standard InputIf we want to make this little text-based game, we need to figure outhow to get text off of standard in. So let’s do another littleprogr">
+  
+  
+  
+  <meta property="og:site_name" content="王见充时光"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+   <link rel="apple-touch-icon" href="/icon.png" />
+   <link rel="shortcut icon" href="/favicon.ico" >
+   <link rel="alternate" href="http://xxx.xx/atom.xml" title="王见充时光" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  <script src="//ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.3.min.js"></script>
+</head>
+
+
+<body>
+  <div id="content" class="inner">
+    <aside id="sidebar" class="alignleft">
+      <div class="navigationBar">
+        <a href="/">王见充时光</a>
+      </div>
+    	
+  <nav class="widget" id="menu">
+	<ul>
+    
+      <li class="cell"><a class="next" href="/">Home</a><li>
+    
+      <li class="cell"><a class="next" href="/archives/">Archives</a><li>
+    
+      <li class="cell"><a class="next" href="/about/">About</a><li>
+    
+      <li class="cell"><a class="next" href="/atom.xml">Subscribe</a><li>
+    
+    </ul>
+</nav>
+
+  
+
+  
+<div class="widget tagcloud">
+  <h3 class="title">标签云</h3>
+  <div class="entry">
+    <a href="/tags/Android/" style="font-size: 20px;">Android</a><a href="/tags/Data-Storage/" style="font-size: 10px;">Data Storage</a><a href="/tags/Java/" style="font-size: 15px;">Java</a><a href="/tags/Jquery/" style="font-size: 10px;">Jquery</a><a href="/tags/RecyclerView/" style="font-size: 10px;">RecyclerView</a><a href="/tags/Service/" style="font-size: 10px;">Service</a><a href="/tags/Thread/" style="font-size: 10px;">Thread</a><a href="/tags/listView/" style="font-size: 10px;">listView</a><a href="/tags/优化/" style="font-size: 10px;">优化</a>
+  </div>
+</div>
+
+
+    	<footer id="footer" class="inner"><div class="copyright">
+  
+  &copy; 2016 Benko bin
+  
+</div>
+
+
+
+</footer>
+    </aside>
+    
+    
+    <div id="hidden-navigationBar" class="navigationBar">
+      <a href="/">王见充时光</a>
+    </div>
+    <div id="main-col" class="alignright">
+    <div id="wrapper">
+      
+<article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+  <header>
+      
+      
+  
+    <h1 class="title"></h1>
+  
+
+      <time datetime="2016-11-07T02:43:11.556Z"><a href="/2016/11/07/rust_for_rubyists/chapter-11/">2016-11-07</a></time>
+      
+  </header>
+    <div class="entry">
+      
+        <h1 id="Standard_Input">Standard Input</h1><p>If we want to make this little text-based game, we need to figure out<br>how to get text off of standard in. So let’s do another little<br>programming project I enjoy when learning a new language the numbers<br>guessing game.</p>
+<h2 id="Guessing_Game">Guessing Game</h2><p>The guessing game is really simple: You enter in a number between 1 and</p>
+<ol>
+<li>The computer tells you if you’re too low, too high, or just right.<br>You get five tries, after which the computer tells you the answer if you<br>haven’t gotten it yet.</li>
+</ol>
+<p>I pick this example because it’s fun, not too hard, and lets us do<br>text-based I/O with a teeny bit of logic. Let’s go!</p>
+<h2 id="Using_stdin()">Using <code>stdin()</code></h2><p>Turns out getting text input is pretty simple. Just try this:</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">use</span> std::io;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">fn</span> <span class="title">main</span></span>() &#123;</span><br><span class="line">    <span class="built_in">println!</span>(<span class="string">"INPUT:"</span>);</span><br><span class="line">    <span class="keyword">let</span> <span class="keyword">mut</span> reader = io::stdin();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">let</span> input = reader.read_line().ok().expect(<span class="string">"Failed to read line"</span>);</span><br><span class="line"></span><br><span class="line">    <span class="built_in">println!</span>(<span class="string">"YOU TYPED:"</span>);</span><br><span class="line">    <span class="built_in">println!</span>(<span class="string">"&#123;:s&#125;"</span>, input);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Give that a run. It should prompt you to type something in, and then<br>echo out what you typed. Simple enough!</p>
+<p>I want to talk about that import, but first, let’s go over this<br><code>stdin()</code> business. Basically. <code>io::stdin()</code> will give you a reference<br>to standard in.  Next, the <code>read_line()</code> method. This reads stuff up to a <code>\n</code><br>from whatever it’s implemented on. So we grab that line, save it in a variable,<br>and then print it out again. Super simple.</p>
+<p>This <code>ok().expect()</code> business we’ll talk about in a minute. First, what’s up with<br>this <code>use</code> shenanigans?</p>
+<h2 id="How_to_use_use">How to use <code>use</code></h2><p>Let’s talk about modules. One of the big things that sorta sucks about C<br>(and Ruby) is that ‘modules’ are basically based on files. You include<br>the file, and that’s about it. There’s no way to really qualify “I want<br>this bit of code,” you say “I want this file that happens to have this<br>code in it.”</p>
+<p>Rust basically pretends that it has these two lines at the beginning of<br>every program:</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">extern</span> <span class="keyword">crate</span> std;</span><br><span class="line"><span class="keyword">use</span> std::prelude::*;</span><br></pre></td></tr></table></figure>
+<p>Two things here. The first line is this <code>extern crate</code> business. I wanted<br>to clarify my understanding, so I jumped into the <a href="http://chat.mibbit.com/?server=irc.mozilla.org&amp;channel=%23rust" target="_blank" rel="external">ever helpful Rust<br>IRC</a> and<br>asked:</p>
+<pre><code>pcwalton: basically <span class="string">"extern mod"</span> <span class="keyword">is</span> <span class="keyword">where</span> you <span class="keyword">put</span> <span class="keyword">the</span> stuff you'd <span class="keyword">put</span> <span class="function_start"><span class="keyword">on</span></span> <span class="keyword">the</span> compiler link line <span class="keyword">in</span> C++
+</code></pre><p>(<code>extern crate</code> was <code>extern mod</code> back then.)</p>
+<p>Right. So we’re saying ‘please link against this library.’ Rust uses a<br>load path to find where those libraries are, which you can modify with<br>the <code>-L</code> command-line flag. For instance:</p>
+<pre><code><span class="variable">$ </span>rustc -<span class="constant">L </span>./lib -o foo foo.rs
+</code></pre><p>Would compile <code>foo.rs</code> into <code>foo</code> while also looking for extra libraries<br>in the <code>lib</code> directory. These libraries are called ‘crates’ in Rust, and<br>you can make one of your own with the <code>--lib</code> flag to <code>rustc</code>:</p>
+<pre><code>$ rustc <span class="comment">--lib -o bar bar.rs</span>
+</code></pre><p>This would make a shared library crate named <code>bar</code>. Technically, any<br>time you compile something, it makes a crate: the <code>--lib</code> flag just says<br>that we’re making a shared library explicitly, so Rust won’t look for a<br><code>main()</code>. When you invoke <code>rustc</code> normally, you’re also building a<br>crate, it’s just not shared.</p>
+<p>Okay, so, once you’ve imported a crate, what do you get? Well, it will<br>put a module with the same name as the crate into the current scope. But<br>crates can also have other modules, which only get imported when you<br>qualify them.</p>
+<p>Modules?</p>
+<p>Every Rust file can contain one top-level module, and modules can<br>contain other modules. Modules look like this:</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">mod</span> foo &#123;</span><br><span class="line">    <span class="keyword">pub</span> <span class="function"><span class="keyword">fn</span> <span class="title">bar</span></span>() &#123; <span class="string">"bar"</span> &#125;</span><br><span class="line">    <span class="keyword">pub</span> <span class="function"><span class="keyword">fn</span> <span class="title">baz</span></span>() &#123; <span class="string">"baz"</span> &#125;</span><br><span class="line">    <span class="keyword">pub</span> <span class="function"><span class="keyword">fn</span> <span class="title">qux</span></span>() &#123; <span class="string">"qux"</span> &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>You just shove a <code>mod</code> around everything that goes in the module. To<br>bring <code>bar</code> into scope, you:</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">use</span> foo::bar;</span><br></pre></td></tr></table></figure>
+<p>To bring them all into scope, you:</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">use</span> foo::*;</span><br></pre></td></tr></table></figure>
+<p>To bring <code>bar</code> and <code>baz</code> into scope, but not <code>qux</code> you do either one of<br>these:</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">use</span> foo::bar;</span><br><span class="line"><span class="keyword">use</span> foo::baz;</span><br><span class="line"></span><br><span class="line"><span class="keyword">use</span> foo::&#123;bar,baz&#125;;</span><br></pre></td></tr></table></figure>
+<p>Pretty simple. So now we can see why the code acts like it has these two<br>lines at the top:</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">extern</span> <span class="keyword">crate</span> std;</span><br><span class="line"><span class="keyword">use</span> std::prelude::*;</span><br></pre></td></tr></table></figure>
+<p>We want to link against the core library, and then import all the<br>default io stuff into scope (that’s what the prelude is). This is why we<br>need:</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">use</span> std::io;</span><br></pre></td></tr></table></figure>
+<h2 id="Casting_to_integer">Casting to integer</h2><p>So, I was trying to cast a string to an integer to get this program<br>going. So I wrote this:</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">use</span> std::io;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">fn</span> <span class="title">main</span></span>() &#123;</span><br><span class="line">    <span class="built_in">println!</span>(<span class="string">"INPUT:"</span>);</span><br><span class="line">    <span class="keyword">let</span> <span class="keyword">mut</span> reader = io::stdin();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">let</span> input = reader.read_line().ok().expect(<span class="string">"Failed to read line"</span>);</span><br><span class="line">    <span class="keyword">let</span> input_num: Option&lt;<span class="keyword">int</span>&gt; = from_str(input.as_slice().trim());</span><br><span class="line"></span><br><span class="line">    <span class="built_in">println!</span>(<span class="string">"YOU TYPED:"</span>);</span><br><span class="line">    <span class="built_in">println!</span>(<span class="string">"&#123;&#125;"</span>, input_num);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>I was gonna convert the string to an int, then back to a string to print<br>it out to the screen.</p>
+<p>This gave an odd result:</p>
+<pre><code>$ rustc casting<span class="class">.rs</span> &amp;&amp; ./casting
+INPUT:
+<span class="number">5</span>
+YOU TYPED:
+<span class="function"><span class="title">Some</span><span class="params">(<span class="number">5</span>)</span></span>
+</code></pre><p>Wait, huh? Here’s the thing: Rust <strong>knows</strong> that we might have a string<br>that doesn’t make any sense as an integer. For example: <code>&quot;foo&quot;</code>. So it<br>doesn’t actually return a string, it returns an <code>Option</code>. We can then<br>use pattern matching to handle both cases. Observe:</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">use</span> std::io;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">fn</span> <span class="title">main</span></span>() &#123;</span><br><span class="line">    <span class="built_in">println!</span>(<span class="string">"INPUT:"</span>);</span><br><span class="line">    <span class="keyword">let</span> <span class="keyword">mut</span> reader = io::stdin();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">let</span> input = reader.read_line().ok().expect(<span class="string">"Failed to read line"</span>);</span><br><span class="line">    <span class="keyword">let</span> input_num: Option&lt;<span class="keyword">int</span>&gt; = from_str(input.as_slice().trim());</span><br><span class="line"></span><br><span class="line">    <span class="keyword">match</span> input_num &#123;</span><br><span class="line">        Some(number) =&gt; <span class="built_in">println!</span>(<span class="string">"&#123;:d&#125;"</span>, number),</span><br><span class="line">        None         =&gt; <span class="built_in">println!</span>(<span class="string">"Hey, put in a number."</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Remember <code>match</code>? It’s really good for matching against some kind of<br>type and breaking it up. Here we match against our <code>Option</code> type.<br><code>Option</code> looks like this:</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">enum</span> <span class="title">Option</span>&lt;T&gt; &#123;</span><br><span class="line">    Some(T),</span><br><span class="line">    None</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>Option</code> is called <code>Maybe</code> in some other languages, but basically, you<br>can think of it as a type that handles what we’d use <code>nil</code> for in Ruby.<br>We may have <code>Some(int)</code>, but we also may have <code>None</code>. Computations that<br>may fail in some way should return <code>None</code> if it fails. Simple. We can’t<br>ever ignore a possible failure: the type system makes us handle it.</p>
+<h2 id="Looping_forever">Looping forever</h2><p>Looping forever is possible with <code>while true</code>, but like in Ruby, that’s<br>kinda silly. Rust gives us <code>loop</code> to loop forever:</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">loop</span> &#123;</span><br><span class="line">    <span class="built_in">println!</span>(<span class="string">"HELLO"</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Obviously you don’t want to actually run that. You can use <code>break</code> to<br>break out of the loop:</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> <span class="keyword">mut</span> i = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">loop</span> &#123;</span><br><span class="line">    i += <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">if</span> i == <span class="number">5</span> &#123; <span class="keyword">break</span>; &#125;</span><br><span class="line">    <span class="built_in">println!</span>(<span class="string">"hi"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>This will print <code>&quot;hi&quot;</code> four times. You’re going to want to do this,<br>because if someone mis-types a number, we don’t want to count it against<br>them: we should just ask them to put in another number.</p>
+<h2 id="Random_Number_Generation">Random Number Generation</h2><p>Random number generation isn’t too bad:</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">use</span> std::rand::Rng;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">fn</span> <span class="title">main</span></span>() &#123;</span><br><span class="line">    <span class="keyword">let</span> secret_number = std::rand::task_rng().gen_range(<span class="number">1</span>i, <span class="number">101</span>);</span><br><span class="line">    <span class="built_in">println!</span>(<span class="string">"&#123;:d&#125;"</span>, secret_number);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>This will print out a different number each time you run it. This will get us a<br>random number between 1 and 100.</p>
+<p>Okay! You should have all the tools you need to implement the guessing<br>game. Have at it. I’m starting… now.</p>
+<h2 id="My_version">My version</h2><p>Okay! That took me… about half an hour. Maybe 45 minutes. I found some helpful<br>stuff in the standard library we didn’t talk about: <code>cmp</code>, mainly:</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">use</span> std::io;</span><br><span class="line"><span class="keyword">use</span> std::rand::Rng;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">fn</span> <span class="title">main</span></span>() &#123;</span><br><span class="line">    <span class="built_in">println!</span>(<span class="string">"Guess the number!"</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">let</span> secret_number = std::rand::task_rng().gen_range(<span class="number">1</span>i, <span class="number">101</span>);</span><br><span class="line">    <span class="built_in">println!</span>(<span class="string">"Secret number is &#123;&#125;"</span>, secret_number);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">let</span> max_number_of_tries = <span class="number">5</span>;</span><br><span class="line">    <span class="keyword">let</span> <span class="keyword">mut</span> guesses: <span class="keyword">int</span> = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">let</span> <span class="keyword">mut</span> reader = io::stdin();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">loop</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> guesses == max_number_of_tries &#123;</span><br><span class="line">          <span class="built_in">println!</span>(<span class="string">"You failed to guess within the limit of &#123;:d&#125; guesses!"</span>, max_number_of_tries);</span><br><span class="line">          <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">println!</span>(<span class="string">"Please input guess number &#123;&#125;"</span>, guesses + <span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">let</span> input = reader.read_line().ok().expect(<span class="string">"Failed to read line"</span>);</span><br><span class="line">        <span class="keyword">let</span> input_num: Option&lt;<span class="keyword">int</span>&gt; = from_str(input.as_slice().trim());</span><br><span class="line"></span><br><span class="line">        <span class="keyword">let</span> num = <span class="keyword">match</span> input_num  &#123;</span><br><span class="line">            Some(num) =&gt; num,</span><br><span class="line">            None      =&gt; &#123;</span><br><span class="line">                <span class="built_in">println!</span>(<span class="string">"Please input a number."</span>);</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;;</span><br><span class="line"></span><br><span class="line">        <span class="built_in">println!</span>(<span class="string">"You guessed: &#123;&#125;"</span>, num);</span><br><span class="line">        guesses += <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">match</span> num.cmp(&amp;secret_number) &#123;</span><br><span class="line">            Less    =&gt; <span class="built_in">println!</span>(<span class="string">"Too small!"</span>),</span><br><span class="line">            Greater =&gt; <span class="built_in">println!</span>(<span class="string">"Too big!"</span>),</span><br><span class="line">            Equal   =&gt; &#123;</span><br><span class="line">                <span class="built_in">println!</span>(<span class="string">"You win!"</span>);</span><br><span class="line">                <span class="built_in">println!</span>(<span class="string">"You took &#123;&#125; guesses!"</span>, guesses);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;,</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="Conclusion">Conclusion</h2><p>I’m pretty sure at this point we have basically everything I was able to<br>do as a child when programming stuff. You know enough of Rust now to be<br>able to make silly little games and scripts. This is obviously neat, but<br>from this point on, it’s more about libraries, style, and solving things<br>in an idiomatic way than it is learning syntax. Of course, this was not<br>a complete introduction to the language, but this is the end of the<br>‘beginner level’ stuff. You should have a basic idea of how to write<br>many programs by this point. Pick a few projects, try them out.</p>
+
+	     
+	         <p style="margin:20px 0; color:#9f9f9f; font-size:12px;">
+<span>Posted by <a style="color:#9f9f9f;" href="https://github.com/scalaview"><strong>scalaview</strong></a> - 2016-11-07</span><br />
+<span style="line-height:13px;">如需转载，请注明： 本文来自 <a style="color:#9f9f9f;" href="http://scalaview.github.io"><strong>王见充时光</strong></a></span>
+</p>
+       	
+      
+    </div>
+    <footer>
+      
+	 
+     		  
+       		
+     		  
+       	 
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<section id="comments">
+    <!-- 多说评论框 start -->
+    <div class="ds-thread" data-thread-key="post-rust_for_rubyists/chapter-11" data-title="" data-url="http://scalaview.github.io/2016/11/07/rust_for_rubyists/chapter-11/"></div>
+    <!-- 多说评论框 end -->
+    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+    <script type="text/javascript">
+    var duoshuoQuery = {short_name:'scalaview'};
+      (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0]
+         || document.getElementsByTagName('body')[0]).appendChild(ds);
+      })();
+      </script>
+    <!-- 多说公共JS代码 end -->
+  </section>
+</div>
+    </div>
+    <div class="tabbar" onload="divideTabBar()">
+	
+      <div class="tabbaritem"><a class="next" href="/">Home</a></div>
+    
+      <div class="tabbaritem"><a class="next" href="/archives/">Archives</a></div>
+    
+      <div class="tabbaritem"><a class="next" href="/about/">About</a></div>
+    
+      <div class="tabbaritem"><a class="next" href="/atom.xml">Subscribe</a></div>
+    
+</div>
+
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,226 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>王见充时光</title>
+  <meta name="author" content="Benko bin">
+  
+  <meta name="description" content="Pointers, and ownership, oh my!Since you program in Ruby, you probably don’t know about pointers, nor care. Ifyou’re going to work in a language like ">
+  
+  
+  
+  <meta property="og:site_name" content="王见充时光"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+   <link rel="apple-touch-icon" href="/icon.png" />
+   <link rel="shortcut icon" href="/favicon.ico" >
+   <link rel="alternate" href="http://xxx.xx/atom.xml" title="王见充时光" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  <script src="//ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.3.min.js"></script>
+</head>
+
+
+<body>
+  <div id="content" class="inner">
+    <aside id="sidebar" class="alignleft">
+      <div class="navigationBar">
+        <a href="/">王见充时光</a>
+      </div>
+    	
+  <nav class="widget" id="menu">
+	<ul>
+    
+      <li class="cell"><a class="next" href="/">Home</a><li>
+    
+      <li class="cell"><a class="next" href="/archives/">Archives</a><li>
+    
+      <li class="cell"><a class="next" href="/about/">About</a><li>
+    
+      <li class="cell"><a class="next" href="/atom.xml">Subscribe</a><li>
+    
+    </ul>
+</nav>
+
+  
+
+  
+<div class="widget tagcloud">
+  <h3 class="title">标签云</h3>
+  <div class="entry">
+    <a href="/tags/Android/" style="font-size: 20px;">Android</a><a href="/tags/Data-Storage/" style="font-size: 10px;">Data Storage</a><a href="/tags/Java/" style="font-size: 15px;">Java</a><a href="/tags/Jquery/" style="font-size: 10px;">Jquery</a><a href="/tags/RecyclerView/" style="font-size: 10px;">RecyclerView</a><a href="/tags/Service/" style="font-size: 10px;">Service</a><a href="/tags/Thread/" style="font-size: 10px;">Thread</a><a href="/tags/listView/" style="font-size: 10px;">listView</a><a href="/tags/优化/" style="font-size: 10px;">优化</a>
+  </div>
+</div>
+
+
+    	<footer id="footer" class="inner"><div class="copyright">
+  
+  &copy; 2016 Benko bin
+  
+</div>
+
+
+
+</footer>
+    </aside>
+    
+    
+    <div id="hidden-navigationBar" class="navigationBar">
+      <a href="/">王见充时光</a>
+    </div>
+    <div id="main-col" class="alignright">
+    <div id="wrapper">
+      
+<article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+  <header>
+      
+      
+  
+    <h1 class="title"></h1>
+  
+
+      <time datetime="2016-11-07T02:43:08.780Z"><a href="/2016/11/07/rust_for_rubyists/chapter-07/">2016-11-07</a></time>
+      
+  </header>
+    <div class="entry">
+      
+        <h1 id="Pointers,_and_ownership,_oh_my!">Pointers, and ownership, oh my!</h1><p>Since you program in Ruby, you probably don’t know about pointers, nor care. If<br>you’re going to work in a language like Rust, though, you gotta know about<br>them. So let’s talk about the concept real quick, then discuss how Rust handles<br>pointers.</p>
+<h2 id="Pointer_recap">Pointer recap</h2><p>When you create a variable, you’re really giving a name to a chunk of<br>memory somewhere. We’ll use C syntax for these examples assuming that<br>sizeof(int) is 4 in a Little endian system:</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">int i = 5; int j = 6;</span><br></pre></td></tr></table></figure>
+<pre><code><span class="comment">location</span>   <span class="comment">value</span>
+<span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span> <span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span>
+<span class="comment">0x000000</span>   <span class="comment">0x000005</span>
+<span class="comment">0x000001</span>   <span class="comment">0x000000</span>
+<span class="comment">0x000002</span>   <span class="comment">0x000000</span>
+<span class="comment">0x000003</span>   <span class="comment">0x000000</span>
+<span class="comment">0x000004</span>   <span class="comment">0x000006</span>
+<span class="comment">0x000005</span>   <span class="comment">0x000000</span>
+<span class="comment">0x000006</span>   <span class="comment">0x000000</span>
+<span class="comment">0x000007</span>   <span class="comment">0x000000</span>
+</code></pre><p>This is of course slightly simplified. Anyway, we can introduce<br>indirection by making a pointer:</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">int i = 5; int j = 6; int *pi = &#38;i;</span><br></pre></td></tr></table></figure>
+<pre><code>location   <span class="built_in">value</span>
+<span class="comment">---------- ----------</span>
+<span class="number">0x000000</span>   <span class="number">0x000005</span>
+<span class="number">0x000001</span>   <span class="number">0x000000</span>
+<span class="number">0x000002</span>   <span class="number">0x000000</span>
+<span class="number">0x000003</span>   <span class="number">0x000000</span>
+<span class="number">0x000004</span>   <span class="number">0x000006</span>
+<span class="number">0x000005</span>   <span class="number">0x000000</span>
+<span class="number">0x000006</span>   <span class="number">0x000000</span>
+<span class="number">0x000007</span>   <span class="number">0x000000</span>
+<span class="number">0x000008</span>   A hex representing another location <span class="operator">in</span> <span class="operator">the</span> memory (eg. <span class="number">0xf8f200</span>)
+</code></pre><p><code>pi</code> has a pointer to another memory location. We can access the value<br>of the thing that <code>pi</code> points at by using the <code>*</code>:</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">printf(&#34;The value of the thing pi points to is: %d\n&#34;, *pi);</span><br></pre></td></tr></table></figure>
+<p>The <code>*</code> dereferences the pointer, and gives us the value. Simple!</p>
+<p>Here’s the issue: you have no idea if the data that is being pointed to<br>is good. What do you think this code does?:</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">int *pi;&#10;printf(&#34;The value of the thing pi points to is: %d\n&#34;, *pi);</span><br></pre></td></tr></table></figure>
+<p>Who knows!?!? Probably something bad, but <strong>certainly</strong> not something expected.<br>Rust introduces two different kinds of pointers: ‘owned’ and ‘borrowed.’ They<br>indicate different levels of access, so that you know that different people<br>aren’t messing with the things that are being pointed to.  Imagine we spun up<br>ten tasks, passed the same pointer to all of them, and let them go wild. We’d<br>have no idea what was going on.</p>
+<h2 id="Owned_Pointer">Owned Pointer</h2><p>An owned pointer tells Rust that you own a reference to something. We can<br>create one with the <code>box</code> keyword:</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">fn</span> <span class="title">main</span></span>() &#123;</span><br><span class="line">    <span class="keyword">let</span> x = <span class="keyword">box</span> <span class="number">10</span>i;</span><br><span class="line">    <span class="built_in">println!</span>(<span class="string">"&#123;&#125;"</span>, *x);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>You can’t make another owned pointer to this value:</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">fn</span> <span class="title">main</span></span>() &#123;</span><br><span class="line">    <span class="keyword">let</span> x = <span class="keyword">box</span> <span class="number">10</span>i;</span><br><span class="line">    <span class="keyword">let</span> y = x;</span><br><span class="line">    <span class="built_in">println!</span>(<span class="string">"&#123;&#125;"</span>, *x);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>This yields:</p>
+<pre><code>$ rustc owned.rs &amp;&amp; ./owned
+owned.<span class="string">rs:</span><span class="number">4</span>:<span class="number">22</span>: <span class="number">4</span>:<span class="number">24</span> <span class="string">error:</span> use of moved <span class="string">value:</span> `*x`
+owned.<span class="string">rs:</span><span class="number">4</span>     println!(<span class="string">"{}"</span>, *x);
+                              ^~
+<span class="string">note:</span> <span class="keyword">in</span> expansion of format_args!
+&lt;std macros&gt;:<span class="number">2</span>:<span class="number">23</span>: <span class="number">2</span>:<span class="number">77</span> <span class="string">note:</span> expansion site
+&lt;std macros&gt;:<span class="number">1</span>:<span class="number">1</span>: <span class="number">3</span>:<span class="number">2</span> <span class="string">note:</span> <span class="keyword">in</span> expansion of println!
+owned.<span class="string">rs:</span><span class="number">4</span>:<span class="number">5</span>: <span class="number">4</span>:<span class="number">26</span> <span class="string">note:</span> expansion site
+owned.<span class="string">rs:</span><span class="number">3</span>:<span class="number">9</span>: <span class="number">3</span>:<span class="number">10</span> <span class="string">note:</span> `x` moved here because it has type `Box&lt;<span class="typename">int</span>&gt;`, which is moved by <span class="keyword">default</span> 
+owned.<span class="string">rs:</span><span class="number">3</span>     let y = x;
+                   ^
+owned.<span class="string">rs:</span><span class="number">3</span>:<span class="number">9</span>: <span class="number">3</span>:<span class="number">10</span> <span class="string">help:</span> use `ref` to override
+owned.<span class="string">rs:</span><span class="number">3</span>     let y = x;
+                   ^
+<span class="string">error:</span> aborting due to previous error
+</code></pre><p>It tells us that we moved the value of <code>x</code> to <code>y</code> and points out where<br>the move happens. Neat. We can make a copy:</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">fn</span> <span class="title">main</span></span>() &#123;</span><br><span class="line">    <span class="keyword">let</span> x = <span class="keyword">box</span> <span class="number">10</span>i;</span><br><span class="line">    <span class="keyword">let</span> y = x.clone();</span><br><span class="line">    <span class="built_in">println!</span>(<span class="string">"&#123;&#125;"</span>, *x);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>This will work, though it will tell us that <code>y</code> was never used. And they<br>point at two different copies of 10, not the same one.</p>
+<p>That said, you generally don’t need to use an owned pointer. You generally need<br>them for recursive data structures, or when you have a <em>huge</em> chunk of data<br>that you’re passing around between many functions.</p>
+<p>Instead, use a borrowed pointer.</p>
+<h2 id="Borrowed_Pointers">Borrowed Pointers</h2><p>Enter borrowed pointers:</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">fn</span> <span class="title">plus_one</span></span>(x: &amp;<span class="keyword">int</span>) -&gt; <span class="keyword">int</span> &#123;</span><br><span class="line">    *x + <span class="number">1</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">fn</span> <span class="title">main</span></span>() &#123;</span><br><span class="line">    <span class="keyword">let</span> y = <span class="keyword">box</span> <span class="number">10</span>i;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">println!</span>(<span class="string">"&#123;&#125;"</span>, plus_one(&amp;*y));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Borrowed pointers use an <code>&amp;</code>, as you can see. They don’t change any<br>ownership semantics. They do let you write functions that take any other<br>kind of pointer, without caring about those details. The compiler makes<br>sure that all borrowed pointers do not outlive the thing they point to,<br>which means you don’t have to worry about use-after-free or any of the<br>other hairy pointer issues in C.</p>
+<p>Borrowed pointers can get a lot more complex, but this is the gist of<br>them. Always use borrowed pointers when you can, they should be your<br>go-to solution for all your pointer needs.</p>
+<h2 id="Pointer_strategy">Pointer strategy</h2><p>Basically, idiomatic Rust code will… not use pointers at all, and just use<br>values. If you’re writing a function that needs to take a pointer, use borrowed<br>pointers, rather than being specific.</p>
+<p>There are some more complex heap-allocated types in Rust, but they’re outside<br>the scope of this introduction.</p>
+
+	     
+	         <p style="margin:20px 0; color:#9f9f9f; font-size:12px;">
+<span>Posted by <a style="color:#9f9f9f;" href="https://github.com/scalaview"><strong>scalaview</strong></a> - 2016-11-07</span><br />
+<span style="line-height:13px;">如需转载，请注明： 本文来自 <a style="color:#9f9f9f;" href="http://scalaview.github.io"><strong>王见充时光</strong></a></span>
+</p>
+       	
+      
+    </div>
+    <footer>
+      
+	 
+     		  
+       		
+     		  
+       	 
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<section id="comments">
+    <!-- 多说评论框 start -->
+    <div class="ds-thread" data-thread-key="post-rust_for_rubyists/chapter-07" data-title="" data-url="http://scalaview.github.io/2016/11/07/rust_for_rubyists/chapter-07/"></div>
+    <!-- 多说评论框 end -->
+    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+    <script type="text/javascript">
+    var duoshuoQuery = {short_name:'scalaview'};
+      (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0]
+         || document.getElementsByTagName('body')[0]).appendChild(ds);
+      })();
+      </script>
+    <!-- 多说公共JS代码 end -->
+  </section>
+</div>
+    </div>
+    <div class="tabbar" onload="divideTabBar()">
+	
+      <div class="tabbaritem"><a class="next" href="/">Home</a></div>
+    
+      <div class="tabbaritem"><a class="next" href="/archives/">Archives</a></div>
+    
+      <div class="tabbaritem"><a class="next" href="/about/">About</a></div>
+    
+      <div class="tabbaritem"><a class="next" href="/atom.xml">Subscribe</a></div>
+    
+</div>
+
+
+  </div>
+</body>
+</html>

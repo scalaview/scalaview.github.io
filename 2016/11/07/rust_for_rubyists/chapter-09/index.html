@@ -1,0 +1,175 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>王见充时光</title>
+  <meta name="author" content="Benko bin">
+  
+  <meta name="description" content="VectorsBefore getting into generic functions that could handle multiple kindsof Monster, let’s first talk about a format that you end up using themwit">
+  
+  
+  
+  <meta property="og:site_name" content="王见充时光"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+   <link rel="apple-touch-icon" href="/icon.png" />
+   <link rel="shortcut icon" href="/favicon.ico" >
+   <link rel="alternate" href="http://xxx.xx/atom.xml" title="王见充时光" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  <script src="//ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.3.min.js"></script>
+</head>
+
+
+<body>
+  <div id="content" class="inner">
+    <aside id="sidebar" class="alignleft">
+      <div class="navigationBar">
+        <a href="/">王见充时光</a>
+      </div>
+    	
+  <nav class="widget" id="menu">
+	<ul>
+    
+      <li class="cell"><a class="next" href="/">Home</a><li>
+    
+      <li class="cell"><a class="next" href="/archives/">Archives</a><li>
+    
+      <li class="cell"><a class="next" href="/about/">About</a><li>
+    
+      <li class="cell"><a class="next" href="/atom.xml">Subscribe</a><li>
+    
+    </ul>
+</nav>
+
+  
+
+  
+<div class="widget tagcloud">
+  <h3 class="title">标签云</h3>
+  <div class="entry">
+    <a href="/tags/Android/" style="font-size: 20px;">Android</a><a href="/tags/Data-Storage/" style="font-size: 10px;">Data Storage</a><a href="/tags/Java/" style="font-size: 15px;">Java</a><a href="/tags/Jquery/" style="font-size: 10px;">Jquery</a><a href="/tags/RecyclerView/" style="font-size: 10px;">RecyclerView</a><a href="/tags/Service/" style="font-size: 10px;">Service</a><a href="/tags/Thread/" style="font-size: 10px;">Thread</a><a href="/tags/listView/" style="font-size: 10px;">listView</a><a href="/tags/优化/" style="font-size: 10px;">优化</a>
+  </div>
+</div>
+
+
+    	<footer id="footer" class="inner"><div class="copyright">
+  
+  &copy; 2016 Benko bin
+  
+</div>
+
+
+
+</footer>
+    </aside>
+    
+    
+    <div id="hidden-navigationBar" class="navigationBar">
+      <a href="/">王见充时光</a>
+    </div>
+    <div id="main-col" class="alignright">
+    <div id="wrapper">
+      
+<article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+  <header>
+      
+      
+  
+    <h1 class="title"></h1>
+  
+
+      <time datetime="2016-11-07T02:43:08.784Z"><a href="/2016/11/07/rust_for_rubyists/chapter-09/">2016-11-07</a></time>
+      
+  </header>
+    <div class="entry">
+      
+        <h1 id="Vectors">Vectors</h1><p>Before getting into generic functions that could handle multiple kinds<br>of Monster, let’s first talk about a format that you end up using them<br>with often Vectors. Vectors are the ‘array’ in Dwemthy’s Array they’re<br>lists of things, but unlike in Ruby, the elements must all be of the<br>same type. You can have any of the three kinds of pointers to vectors,<br>and you’ll sometimes hear a borrowed pointer to a vector called a<br>‘slice.’</p>
+<h2 id="Examples">Examples</h2><p>See if this looks familiar:</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">fn</span> <span class="title">main</span></span>() &#123;</span><br><span class="line">    <span class="keyword">let</span> your_favorite_numbers = <span class="built_in">vec!</span>[<span class="number">1</span>i, <span class="number">2</span>i, <span class="number">3</span>i];</span><br><span class="line">    <span class="keyword">let</span> my_favorite_numbers = <span class="built_in">vec!</span>[<span class="number">4</span>i, <span class="number">5</span>i, <span class="number">6</span>i];</span><br><span class="line"></span><br><span class="line">    <span class="keyword">let</span> <span class="keyword">mut</span> our_favorite_numbers: Vec&lt;<span class="keyword">int</span>&gt; = Vec::new();</span><br><span class="line"></span><br><span class="line">    our_favorite_numbers.push_all(your_favorite_numbers.as_slice());</span><br><span class="line">    our_favorite_number.push_all(my_favorite_numbers.as_slice());</span><br><span class="line"></span><br><span class="line">    <span class="built_in">println!</span>(<span class="string">"The third favorite number is &#123;&#125;."</span>, our_favorite_numbers[<span class="number">2</span>])</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Seems like business as usual: <code>.push_all()</code> adds the slices, <code>our_favorite_numbers[2]</code> does an<br>indexing operation.</p>
+<h2 id="Mutability_inheritance">Mutability inheritance</h2><p>You can mutate vectors if you make them so:</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">fn</span> <span class="title">main</span></span>() &#123;</span><br><span class="line">    <span class="keyword">let</span> <span class="keyword">mut</span> another_vector = <span class="built_in">vec!</span>[<span class="number">4</span>i];</span><br><span class="line">    another_vector.push_all([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]);</span><br><span class="line"></span><br><span class="line">    <span class="built_in">println!</span>(<span class="string">"The second number is &#123;&#125;."</span>, another_vector[<span class="number">1</span>])</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Of course, changing an element of a vector doesn’t make sense:</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">fn</span> <span class="title">main</span></span>() &#123;</span><br><span class="line">    <span class="keyword">let</span> a_vector = <span class="built_in">vec!</span>[<span class="number">1</span>i, <span class="number">2</span>i, <span class="number">3</span>i];</span><br><span class="line">    a_vector[<span class="number">0</span>] = <span class="number">5</span>; <span class="comment">// error: cannot borrow immutable local variable `a_vector` as mutable</span></span><br><span class="line"></span><br><span class="line">    <span class="built_in">println!</span>(<span class="string">"The first number is &#123;&#125;."</span>, a_vector[<span class="number">0</span>])</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>But you can move it to a mutable one and then change it:</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">fn</span> <span class="title">main</span></span>() &#123;</span><br><span class="line">    <span class="keyword">let</span> a_vector = <span class="built_in">vec!</span>[<span class="number">1</span>i, <span class="number">2</span>i, <span class="number">3</span>i];</span><br><span class="line">    <span class="keyword">let</span> <span class="keyword">mut</span> mut_vector = a_vector.clone();</span><br><span class="line">    mut_vector[<span class="number">0</span>] = <span class="number">5</span>;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">println!</span>(<span class="string">"The first number is &#123;&#125;."</span>, mut_vector[<span class="number">0</span>])</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>When you make an immutable vector mutable, it’s called ‘thawing’ the<br>vector, and the opposite is ‘freezing’ a vector.</p>
+<p>That’s it! Vectors are pretty simple.</p>
+
+	     
+	         <p style="margin:20px 0; color:#9f9f9f; font-size:12px;">
+<span>Posted by <a style="color:#9f9f9f;" href="https://github.com/scalaview"><strong>scalaview</strong></a> - 2016-11-07</span><br />
+<span style="line-height:13px;">如需转载，请注明： 本文来自 <a style="color:#9f9f9f;" href="http://scalaview.github.io"><strong>王见充时光</strong></a></span>
+</p>
+       	
+      
+    </div>
+    <footer>
+      
+	 
+     		  
+       		
+     		  
+       	 
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<section id="comments">
+    <!-- 多说评论框 start -->
+    <div class="ds-thread" data-thread-key="post-rust_for_rubyists/chapter-09" data-title="" data-url="http://scalaview.github.io/2016/11/07/rust_for_rubyists/chapter-09/"></div>
+    <!-- 多说评论框 end -->
+    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+    <script type="text/javascript">
+    var duoshuoQuery = {short_name:'scalaview'};
+      (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0]
+         || document.getElementsByTagName('body')[0]).appendChild(ds);
+      })();
+      </script>
+    <!-- 多说公共JS代码 end -->
+  </section>
+</div>
+    </div>
+    <div class="tabbar" onload="divideTabBar()">
+	
+      <div class="tabbaritem"><a class="next" href="/">Home</a></div>
+    
+      <div class="tabbaritem"><a class="next" href="/archives/">Archives</a></div>
+    
+      <div class="tabbaritem"><a class="next" href="/about/">About</a></div>
+    
+      <div class="tabbaritem"><a class="next" href="/atom.xml">Subscribe</a></div>
+    
+</div>
+
+
+  </div>
+</body>
+</html>
